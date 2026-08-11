@@ -1,0 +1,47 @@
+/*
+ * ============================================================
+ * WORKSPACES
+ * ============================================================
+ */
+
+#workspaces {
+    margin: 2px 2px;
+}
+
+
+#workspaces button {
+    padding: 0 12px;
+    margin: 0 2px;
+
+    border-radius: 5px;
+
+    color: @workspace-fg;
+    background: @workspace-bg;
+
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+}
+
+
+#workspaces button.active {
+    color: @workspace-active-fg;
+
+    border-bottom: 2px solid @workspace-active-border;
+}
+
+
+#workspaces button.empty {
+    color: @workspace-empty-fg;
+}
+
+
+#workspaces button.empty.active {
+    color: @workspace-empty-active-fg;
+}
+
+
+#workspaces button:hover {
+    background: @hover-bg;
+    color: @hover-fg;
+}

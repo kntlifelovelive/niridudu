@@ -1,0 +1,29 @@
+{
+  "group/media": {
+    "orientation": "horizontal",
+    "modules": [
+      "custom/media-animation"
+    ]
+  },
+  "custom/media-animation": {
+    "exec": "~/.config/waybar/custom-media/media-animation.sh",
+    "tooltip": false
+  },
+  "custom/media-now-playing": {
+    "exec": "~/.config/waybar/custom-media/media-now-playing.sh",
+    "interval": 1,
+    "format": "{}",
+    "escape": true,
+    "tooltip": true,
+    "on-click": "playerctl play-pause",
+    "on-click-middle": "playerctl previous",
+    "on-click-right": "playerctl next"
+  },
+  "custom/media-time": {
+    "exec": "~/.config/waybar/custom-media/media-time.sh",
+    "interval": 1,
+    "format": "{}",
+    "escape": true,
+    "tooltip": false
+  }
+}

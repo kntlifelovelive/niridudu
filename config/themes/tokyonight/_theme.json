@@ -1,0 +1,17 @@
+{
+  "name": "tokyonight",
+  "variant": "dark",
+  "gtk-theme": "Tokyonight-Dark",
+  "icon-theme": "Tokyonight-Dark",
+  "cursor-theme": "Bibata-Modern-Ice",
+  "wallpaper-color": "#1a1b26",
+  "wallpapers": [
+    "lake-twilight.jpg",
+    "moon-town.jpg",
+    "celestial-glow.jpg",
+    "mount-awesome.jpg",
+    "painted-valley.jpg",
+    "lo-fi.jpg",
+    "starry-night.jpg"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "kanagawa",
+  "variant": "dark",
+  "gtk-theme": "Kanagawa-B",
+  "icon-theme": "Tela-circle-dark",
+  "cursor-theme": "Bibata-Modern-Ice",
+  "wallpaper-color": "#1f1f28",
+  "wallpapers": [
+    "japan-night.jpg",
+    "temple.jpg",
+    "bamboo.jpg"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "catppuccin-mocha",
+  "variant": "dark",
+  "gtk-theme": "Catppuccin-Mocha-Standard-Blue-Dark",
+  "icon-theme": "Papirus-Dark",
+  "cursor-theme": "Bibata-Modern-Ice",
+  "wallpaper-color": "#1e1e2e",
+  "wallpapers": [
+    "mountains.jpg",
+    "purple-night.jpg",
+    "forest-stars.jpg",
+    "aurora.jpg"
+  ]
+}

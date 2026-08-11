@@ -1,0 +1,16 @@
+{
+  "group/group-tools": {
+    "orientation": "inherit",
+    "drawer": {
+      "transition-duration": 500,
+      "children-class": "other-apps",
+      "transition-left-to-right": false
+    },
+    "modules": [
+      "custom/snip",
+      "tray",
+      "backlight",
+      "network"
+    ]
+  }
+}

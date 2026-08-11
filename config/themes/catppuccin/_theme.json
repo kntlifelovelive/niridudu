@@ -1,0 +1,17 @@
+{
+  "name": "catppuccin",
+  "variant": "dark",
+  "gtk-theme": "catppuccin-mocha-mauve-dark",
+  "icon-theme": "catppuccin-mocha-mauve-dark",
+  "cursor-theme": "Bibata-Modern-Ice",
+  "wallpaper-color": "#1e1e2e",
+  "wallpapers": [
+    "lake-twilight.jpg",
+    "moon-town.jpg",
+    "celestial-glow.jpg",
+    "mount-awesome.jpg",
+    "painted-valley.jpg",
+    "lo-fi.jpg",
+    "starry-night.jpg"
+  ]
+}

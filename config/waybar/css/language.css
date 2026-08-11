@@ -1,0 +1,28 @@
+/*
+ * ============================================================
+ * LANGUAGE
+ * ============================================================
+ */
+
+#language {
+    background: @module-bg;
+    color: @langtext;
+
+    padding: 0 12px;
+    margin: 2px 2px;
+
+    border-radius: 4px;
+
+    font-size: 13px;
+    font-weight: bold;
+
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+}
+
+
+#language:hover {
+    background: @hover-bg;
+    color: @hover-fg;
+}

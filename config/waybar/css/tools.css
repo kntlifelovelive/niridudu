@@ -1,0 +1,71 @@
+/*
+ * ============================================================
+ * TOOLS
+ * ============================================================
+ */
+
+
+/* ------------------------------------------------------------
+ * Group tools
+ * ------------------------------------------------------------ */
+
+#group-tools {
+    background: transparent;
+
+    margin: 0;
+}
+
+
+/* ------------------------------------------------------------
+ * Screenshot
+ * ------------------------------------------------------------ */
+
+#custom-snip {
+    background: @module-bg;
+
+    min-width: 20px;
+
+    padding: 0 16px;
+    margin: 2px 2px;
+
+    border-radius: 4px;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+}
+
+
+#custom-snip:hover {
+    background: @hover-bg;
+    color: @hover-fg;
+}
+
+
+/* ------------------------------------------------------------
+ * Tray
+ * ------------------------------------------------------------ */
+
+#tray {
+    background: @module-bg;
+
+    min-width: 14px;
+
+    padding: 0 12px;
+    margin: 2px 2px;
+
+    border-radius: 4px;
+
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+}
+
+
+#tray:hover {
+    background: @hover-bg;
+    color: @hover-fg;
+}

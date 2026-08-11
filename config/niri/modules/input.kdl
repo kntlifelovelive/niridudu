@@ -1,0 +1,37 @@
+// █ █▄░█ █▀█ █░█ ▀█▀
+// █ █░▀█ █▀▀ █▄█ ░█░
+// ----------------------------------------------------------------------------
+// Input devices (mouse, trackpad, keyboard, etc.)
+// ----------------------------------------------------------------------------
+
+input {
+    keyboard {
+        xkb {
+            layout "us,mm"
+            // options "grp:alt_space_toggle" keybinds block
+        }
+
+        // A fairly fast repeat rate and delay.
+        repeat-delay 200
+        repeat-rate 40
+    }
+
+    touchpad {
+        // Tapping anywhere registers a left click.
+        tap
+
+        // Inverted scrolling.
+        natural-scroll
+
+        // Disable acceleration.
+        accel-profile "flat"
+    }
+
+    mouse {
+        // Disable acceleration.
+        accel-profile "flat"
+
+        // Faster scrolling with the mouse wheel.
+        scroll-factor 2.0
+    }
+}

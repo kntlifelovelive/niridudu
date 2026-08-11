@@ -1,0 +1,172 @@
+#!/usr/bin/env bash
+
+# ┌────────────────────────────────────────────┐
+# │ AuthorModify : KyawNyeinThant              │
+# │ Github       : kntlifelovelive             │
+# │ Date         : 2026 , March, 13            │
+# │ Pro : Kitty Themes Collections             │
+# └────────────────────────────────────────────┘
+
+# ┌────────────────────────────────────────────┐
+# │              Configuration                 │
+# └────────────────────────────────────────────┘
+THEME_DIR="$HOME/.config/kitty/themes"
+CURRENT="$HOME/.config/kitty/current-theme.conf"
+CACHE_DIR="$HOME/.cache/niri-themes"
+CURRENT_KITTY_FILE="$CACHE_DIR/current-kitty-theme"
+
+# ┌────────────────────────────────────────────┐
+# │              Helper Functions              │
+# └────────────────────────────────────────────┘
+info() { echo -e "\033[1;36m[INFO]\033[0m $1"; }
+ok() { echo -e "\033[1;32m[OK]\033[0m $1"; }
+warn() { echo -e "\033[1;33m[WARN]\033[0m $1"; }
+error() {
+  echo -e "\033[1;31m[ERROR]\033[0m $1"
+  exit 1
+}
+
+# ┌────────────────────────────────────────────┐
+# │              Get Current Kitty Theme       │
+# └────────────────────────────────────────────┘
+get_current_kitty_theme() {
+  local theme=""
+
+  # Try to get from cache file first
+  if [[ -f "$CURRENT_KITTY_FILE" ]]; then
+    theme="$(cat "$CURRENT_KITTY_FILE" 2>/dev/null | xargs || true)"
+  fi
+
+  # If cache file is empty, try to get from symlink
+  if [[ -z "$theme" ]] && [[ -L "$CURRENT" ]]; then
+    theme="$(basename "$(readlink "$CURRENT")" .conf 2>/dev/null || true)"
+  fi
+
+  # Default fallback
+  if [[ -z "$theme" ]]; then
+    theme="default"
+  fi
+
+  echo "$theme"
+}
+
+# ┌────────────────────────────────────────────┐
+# │              List Available Themes         │
+# └────────────────────────────────────────────┘
+list_themes() {
+  find "$THEME_DIR" -maxdepth 1 -type f -name "*.conf" -printf "%f\n" 2>/dev/null |
+    sed 's/\.conf$//' |
+    sort 2>/dev/null || true
+}
+
+# ┌────────────────────────────────────────────┐
+# │              Main Script                   │
+# └────────────────────────────────────────────┘
+main() {
+  # Get current theme
+  local current
+  current="$(get_current_kitty_theme)"
+
+  # Get all themes
+  local themes
+  themes="$(list_themes)"
+
+  # Build theme menu with current theme marked and at top
+  local theme_menu=""
+
+  # Add current theme first with ★ indicator
+  if echo "$themes" | grep -q "^${current}$"; then
+    theme_menu+="★ ${current}\n"
+  else
+    # If current theme not found in list, add it anyway
+    theme_menu+="★ ${current}\n"
+  fi
+
+  # Add all other themes
+  while IFS= read -r theme; do
+    if [[ -n "$theme" && "$theme" != "$current" ]]; then
+      theme_menu+="  ${theme}\n"
+    fi
+  done <<<"$themes"
+
+  # Remove trailing newline
+  theme_menu="${theme_menu%\\n}"
+
+  # Show Rofi selector
+  local chosen
+  chosen="$(echo -e "$theme_menu" |
+    rofi \
+      -dmenu \
+      -i \
+      -markup-rows \
+      -p "Kitty Theme Switcher" \
+      -theme-str '
+window {
+    width: 450px;
+    padding: 18px;
+    border-radius: 0px;
+    border: 1px;
+    border-color: #7aa2f7;
+    background-color: rgba(26,27,38,0.95);
+}
+
+listview {
+    lines: 20;
+    fixed-height: true;
+    scrollbar: false;
+    spacing: 1px;
+    background-color: rgba(26,27,38,0.95);
+}
+
+element {
+    padding: 1px;
+    border-radius: 0px;
+    background-color: rgba(26,27,38,0.95);
+    text-color: #cdd6f4;
+}
+
+element selected {
+    background-color: rgba(122,162,247,0.25);
+    text-color: #cdd6f4;
+}
+
+prompt {
+    text-color: #7dcfff;
+    font: "JetBrainsMono Bold 15";
+}
+
+entry {
+    text-color: #cdd6f4;
+    background-color: rgba(26,27,38,0.95);
+    placeholder-color: #6c7086;
+    font: "JetBrainsMono Bold 13";
+}
+')"
+
+  [[ -z "$chosen" ]] && exit 0
+
+  # Clean selection (remove ★ and spaces)
+  chosen="$(echo "$chosen" | sed 's/^[★ ]*//' | sed 's/^[ ]*//')"
+
+  # Create symlink
+  ln -sf "$THEME_DIR/$chosen.conf" "$CURRENT" 2>/dev/null || true
+
+  # Save current theme to cache
+  mkdir -p "$CACHE_DIR" 2>/dev/null || true
+  echo "$chosen" >"$CURRENT_KITTY_FILE" 2>/dev/null || true
+
+  # Reload kitty instantly
+  if command -v kitty &>/dev/null; then
+    kitty @ load-config 2>/dev/null || true
+  fi
+
+  # Notification
+  if command -v notify-send &>/dev/null; then
+    notify-send "Kitty Theme" "Switched to $chosen" 2>/dev/null || true
+  fi
+
+  echo "Switched to Kitty theme: $chosen"
+}
+
+# Run main function
+main "$@"

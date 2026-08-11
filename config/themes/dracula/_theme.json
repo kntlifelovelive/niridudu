@@ -1,0 +1,13 @@
+{
+  "name": "dracula",
+  "variant": "dark",
+  "gtk-theme": "Dracula",
+  "icon-theme": "Papirus-Dark",
+  "cursor-theme": "Bibata-Modern-Ice",
+  "wallpaper-color": "#282a36",
+  "wallpapers": [
+    "purple-moon.jpg",
+    "castle-night.jpg",
+    "dark-city.jpg"
+  ]
+}

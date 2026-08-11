@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Keyboard layout switcher for Niri
+
+# Switch to next layout
+niri msg action switch-layout next
+
+# Small delay to let the switch complete
+sleep 0.1
+
+# Get current layout name
+layMain=$(niri msg keyboard-layouts | grep '^ \*' | sed 's/^ \* [0-9]* //')
+
+# Icon directory (fallback if not set)
+if [ -z "${XDG_CONFIG_HOME}" ]; then
+  XDG_CONFIG_HOME="${HOME}/.config"
+fi
+ICONS_DIR="${XDG_CONFIG_HOME}/mako/icons"
+
+# Check if icon exists, use fallback if not
+if [ -f "${ICONS_DIR}/keyboard.svg" ]; then
+  ICON_PATH="${ICONS_DIR}/keyboard.svg"
+else
+  ICON_PATH="input-keyboard" # system default icon
+fi
+
+# Send notification with current layout
+notify-send -a "Keyboard Layout" -t 800 -i "${ICON_PATH}" "Layout: ${layMain}"
+
+# Optional: Also print to console for debugging
+echo "Switched to layout: ${layMain}"

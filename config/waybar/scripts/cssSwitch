@@ -1,0 +1,167 @@
+#!/usr/bin/env bash
+
+# ┌────────────────────────────────────────────┐
+# │           Waybar Theme Switcher            │
+# └────────────────────────────────────────────┘
+
+# Rofi theme switcher with keyboard navigation (k/j + up/down)
+# Uses symlink to switch themes
+
+set -o errexit
+set -o pipefail
+set -o nounset
+
+# Configuration
+WAYBAR_DIR="$HOME/.config/waybar"
+THEME_DIR="$WAYBAR_DIR/themes"
+CURRENT_THEME_LINK="$THEME_DIR/current_theme.css"
+
+# Function to get current theme name
+get_current_theme() {
+  if [ -L "$CURRENT_THEME_LINK" ] && [ -e "$CURRENT_THEME_LINK" ]; then
+    basename "$(readlink "$CURRENT_THEME_LINK")" .css
+  else
+    echo "tokyonight"
+  fi
+}
+
+# Function to list available themes (excluding current_theme.css)
+list_themes() {
+  # List all .css files, exclude current_theme.css, extract filename without extension
+  for file in "$THEME_DIR"/*.css; do
+    filename=$(basename "$file" .css)
+    if [ "$filename" != "current_theme" ]; then
+      echo "$filename"
+    fi
+  done | sort
+}
+
+# Build theme menu with current theme marked
+current=$(get_current_theme)
+theme_menu=""
+
+# Get all themes
+themes=$(list_themes)
+
+# Add current theme first with indicator
+if echo "$themes" | grep -q "^${current}$"; then
+  theme_menu+="★ ${current}\n"
+else
+  # If current theme not found, add it anyway
+  theme_menu+="★ ${current}\n"
+fi
+
+# Add all other themes
+for theme in $themes; do
+  if [ "$theme" != "$current" ]; then
+    theme_menu+="  ${theme}\n"
+  fi
+done
+
+# Show Rofi menu
+chosen=$(
+  echo -e "$theme_menu" |
+    rofi \
+      -dmenu \
+      -i \
+      -markup-rows \
+      -p " Waybar Theme" \
+      -kb-row-up "Up,Control+p,k" \
+      -kb-row-down "Down,Control+n,j" \
+      -theme-str '
+window {
+    width: 320px;
+    padding: 20px;
+    border-radius: 12px;
+    border: 2px;
+    border-color: #7aa2f7;
+    background-color: rgba(26,27,38,0.92);
+}
+
+listview {
+    lines: 10;
+    fixed-height: true;
+    scrollbar: false;
+    spacing: 6px;
+    background-color: rgba(26,27,38,0.92);
+}
+
+element {
+    padding: 10px 16px;
+    border-radius: 8px;
+    background-color: rgba(26,27,38,0.92);
+    text-color: #a9b1d6;
+    font: "JetBrainsMono Nerd Font 14";
+}
+
+element selected {
+    background-color: rgba(122,162,247,0.25);
+    text-color: #ffffff;
+    border: 1px;
+    border-color: #7aa2f7;
+}
+
+element icon {
+    size: 1.8em;
+    vertical-align: 0.2em;
+}
+
+prompt {
+    text-color: #7aa2f7;
+    font: "JetBrainsMono Bold 16";
+    padding: 0px 0px 12px 0px;
+    horizontal-align: 0.5;
+}
+
+inputbar {
+    children: [ prompt ];
+}
+
+entry {
+    placeholder: "Search themes...";
+    text-color: #a9b1d6;
+    font: "JetBrainsMono Nerd Font 14";
+}
+'
+)
+
+# Clean selection (remove ★ and spaces)
+chosen=$(echo "$chosen" | sed 's/^[★ ]*//' | sed 's/^[ ]*//')
+
+# Function to switch theme
+switch_theme() {
+  local theme="$1"
+  local theme_file="$THEME_DIR/$theme.css"
+
+  if [ ! -f "$theme_file" ]; then
+    echo " Theme '$theme' not found!"
+    notify-send -a "Waybar" -u critical "Theme Error" "Theme '$theme' not found!"
+    return 1
+  fi
+
+  # Remove old symlink
+  rm -f "$CURRENT_THEME_LINK"
+
+  # Create new symlink
+  ln -sf "$theme_file" "$CURRENT_THEME_LINK"
+
+  # Restart Waybar to apply theme
+  killall -SIGUSR2 waybar 2>/dev/null || {
+    killall waybar 2>/dev/null
+    waybar &
+  }
+
+  # Send notification
+  notify-send -a "Waybar" -t 1200 -i "color-picker" "Theme Switched" "Applied: $theme"
+
+  echo "Switched to theme: $theme"
+  return 0
+}
+
+# Execute switch
+if [ -n "$chosen" ]; then
+  switch_theme "$chosen"
+else
+  echo "No theme selected."
+  exit 0
+fi

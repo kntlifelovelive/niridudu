@@ -1,0 +1,10 @@
+// Niri Main Config
+
+include "modules/animations.kdl"
+include "modules/autostartup.kdl"
+include "modules/input.kdl"
+include "modules/keybind.kdl"
+include "modules/windowRuleLayer.kdl"
+include "modules/behaviorAesthetics.kdl"
+include "modules/output.kdl"
+include "modules/enviroment.kdl"

@@ -1,0 +1,19 @@
+
+// █░░ ▄▀█ █▄█ █▀█ █░█ ▀█▀
+// █▄▄ █▀█ ░█░ █▄█ █▄█ ░█░
+
+
+output "eDP-1" {
+    mode "1366x768@60.059"
+    scale 1
+    focus-at-startup
+    backdrop-color "#001100"
+
+    hot-corners {
+       //off
+        top-left
+        // top-right
+        // bottom-left
+        // bottom-right
+    }
+}

@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Launch or focus an application
+set -euo pipefail
+
+app="$1"
+shift
+
+if pgrep -x "$app" &>/dev/null; then
+    niri msg action focus-window --app-id "$app" 2>/dev/null || true
+else
+    exec "$app" "$@" &
+fi

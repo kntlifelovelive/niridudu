@@ -1,0 +1,154 @@
+#!/usr/bin/env bash
+
+# ┌────────────────────────────────────────────┐
+# │        Hotkey Overlay                      │
+# │        Shows categorized keybindings       │
+# └────────────────────────────────────────────┘
+
+set -euo pipefail
+
+CONFIG_FILE="${1:-$HOME/.config/niri/modules/keybind.kdl}"
+
+if [[ ! -f "$CONFIG_FILE" ]]; then
+    echo "Error: Niri keybind config not found: $CONFIG_FILE" >&2
+    exit 1
+fi
+
+# ── Format key names nicely ──
+format_key() {
+    local key="$1"
+    key="${key//Mod/Super}"
+    key="${key//Plus/+}"
+    key="${key//Grave/\`}"
+    key="${key//BackSlash/\\}"
+    key="${key//SemiColon/;}"
+    key="${key//BracketLeft/[}"
+    key="${key//BracketRight/]}"
+    key="${key//Comma/,}"
+    key="${key//Period/.}"
+    key="${key//Page_Down/PgDn}"
+    key="${key//Page_Up/PgUp}"
+    key="${key//WheelScrollDown/Scroll↓}"
+    key="${key//WheelScrollUp/Scroll↑}"
+    key="${key//MouseBack/Mouse4}"
+    key="${key//MouseForward/Mouse5}"
+    echo "$key"
+}
+
+# ── Categorize title ──
+get_category() {
+    local title="$1"
+    case "$title" in
+        *Overview*|*Launcher*) echo "Launcher" ;;
+        *Screenshot*|*Pick*|*Cast*) echo "Screenshots" ;;
+        *Volume*|*Mute*|*Play*|*track*|*Seek*) echo "Audio" ;;
+        *Brightness*) echo "Brightness" ;;
+        *Theme*|*Wallpaper*) echo "Themes & Wallpaper" ;;
+        *Notification*|*Dismiss*) echo "Notifications" ;;
+        *Lock*|*Power*|*Exit*|*Quit*) echo "Power & System" ;;
+        *Window*|*Column*|*Focus*|*Close*|*Float*|*Maximize*|*Fullscreen*|*Expand*|*Center*|*Move*) echo "Window Management" ;;
+        *Workspace*) echo "Workspace" ;;
+        *Monitor*|*Scale*) echo "Display" ;;
+        *Terminal*|*File*|*Browser*|*Music*|*Passwords*|*Notes*|*Health*|*Calculator*) echo "Applications" ;;
+        *Clipboard*) echo "Clipboard" ;;
+        *) echo "General" ;;
+    esac
+}
+
+# ── Extract keybinds from KDL ──
+parse_binds() {
+    local line=""
+
+    while IFS= read -r line; do
+        # Skip commented lines
+        [[ "$line" =~ ^[[:space:]]*// ]] && continue
+
+        # Skip lines without hotkey-overlay-title
+        if [[ ! "$line" =~ hotkey-overlay-title=\"([^\"]+)\" ]]; then
+            continue
+        fi
+
+        local title="${BASH_REMATCH[1]}"
+
+        # Extract keybind (first token)
+        local keybind
+        keybind="$(echo "$line" | awk '{print $1}')"
+        [[ -z "$keybind" ]] && continue
+        [[ "$keybind" == "binds" ]] && continue
+
+        # Categorize
+        local category
+        category="$(get_category "$title")"
+
+        # Format keybind for display
+        local display_key
+        display_key="$(format_key "$keybind")"
+
+        printf "%s|%s|%s\n" "$category" "$display_key" "$title"
+    done < "$CONFIG_FILE"
+}
+
+# ── Display overlay with notify-send ──
+show_overlay() {
+    local bind_data
+    bind_data="$(parse_binds)"
+
+    local current_cat=""
+    local output=""
+
+    while IFS='|' read -r category key title; do
+        if [[ "$category" != "$current_cat" ]]; then
+            output+="\n<b>${category}</b>\n"
+            current_cat="$category"
+        fi
+        output+="  ${key}  →  ${title}\n"
+    done <<< "$bind_data"
+
+    if command -v notify-send &>/dev/null; then
+        notify-send -t 10000 "Niri Keybindings" "$output"
+    else
+        echo -e "$output"
+    fi
+}
+
+# ── Rofi overlay menu ──
+rofi_overlay() {
+    if ! command -v rofi &>/dev/null; then
+        echo "Error: rofi is not installed" >&2
+        exit 1
+    fi
+
+    local bind_data
+    bind_data="$(parse_binds)"
+
+    local chosen
+    chosen="$(echo "$bind_data" | while IFS='|' read -r category key title; do
+        printf "%s\t%s\t%s\n" "$title" "$key" "$category"
+    done | rofi -dmenu -i -p "Keybinds = ")"
+
+    [[ -z "$chosen" ]] && exit 0
+
+    local shortcut
+    shortcut="$(echo "$chosen" | awk -F'\t' '{print $2}')"
+    local desc
+    desc="$(echo "$chosen" | awk -F'\t' '{print $1}')"
+
+    if command -v notify-send &>/dev/null; then
+        notify-send "Keybind: $desc" "$shortcut"
+    fi
+    echo "Shortcut: $shortcut  →  $desc"
+}
+
+# ── Main ──
+main() {
+    case "${1:-}" in
+        --rofi|-r)
+            rofi_overlay
+            ;;
+        *)
+            show_overlay
+            ;;
+    esac
+}
+
+main "$@"

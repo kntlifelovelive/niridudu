@@ -1,0 +1,1 @@
+/home/bubu/niribubu/.config/zsh/.zprofile

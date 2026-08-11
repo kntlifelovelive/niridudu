@@ -1,0 +1,8 @@
+{
+  "custom/snip": {
+    "format": "",
+    "tooltip": true,
+    "tooltip-format": "Screenshot",
+    "on-click": "grim -g \"$(slurp)\" ~/Pictures/screenshot/$(date +%s).png"
+  }
+}

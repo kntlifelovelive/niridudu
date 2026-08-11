@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# First boot setup - apply default theme if not set
+set -euo pipefail
+
+STATE="$HOME/.cache/niri-themes"
+CURRENT_THEME="$STATE/current-theme"
+
+if [[ ! -f "$CURRENT_THEME" ]]; then
+    "$HOME/.local/bin/theme-switch" tokyonight 2>/dev/null || true
+fi

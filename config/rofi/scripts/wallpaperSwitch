@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+# ┌────────────────────────────────────────────┐
+# │ AuthorModify : KyawNyeinThant              │
+# │ Github       : kntlifelovelive             │
+# │ Date         : 2026 , March, 13            │
+# │ Rofi Wallpaper Switch BashScript           │
+# └────────────────────────────────────────────┘
+
+WALL_DIR="$HOME/Pictures/wallpapers"
+STATE_FILE="$HOME/.cache/current_wallpaper"
+
+mkdir -p "$HOME/.cache"
+
+menu() {
+  find "$WALL_DIR" -type f \( \
+    -iname "*.jpg" -o \
+    -iname "*.png" -o \
+    -iname "*.jpeg" -o \
+    -iname "*.webp" \
+    \) | sort | while read -r img; do
+    name="$(basename "$img")"
+    printf "%s\x00icon\x1f%s\n" "$name" "$img"
+  done
+}
+
+choice="$(menu | rofi \
+  -show-icons \
+  -i \
+  -dmenu \
+  -theme ~/.config/rofi/wallpaper/wallpapers.rasi \
+  -p BuBulove)"
+
+[ -z "$choice" ] && exit 0
+
+WALL="$(find "$WALL_DIR" -type f -iname "$choice" -print -quit)"
+[ -z "$WALL" ] && exit 0
+
+echo "$WALL" >"$STATE_FILE"
+
+pkill swaybg 2>/dev/null
+swaybg -i "$WALL" -m fill &

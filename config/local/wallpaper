@@ -1,0 +1,154 @@
+#!/usr/bin/env bash
+
+# ┌────────────────────────────────────────────┐
+# │ AuthorModify : KyawNyeinThant              │
+# │ Github       : kntlifelovelive             │
+# │ Date         : 2026 , August, 06           │
+# │ Rofi Wallpaper Switch with awww            │
+# └────────────────────────────────────────────┘
+
+set -euo pipefail
+
+### Configuration
+WALL_DIR="$HOME/Pictures/wallpapers"
+STATE_FILE="$HOME/.cache/niri-themes/current-wallpaper.txt"
+STATE_DIR="$HOME/.cache/niri-themes"
+ROFI_THEME="$HOME/.config/rofi/wallpaper/wallpapers.rasi"
+TRANSITION_TYPE="fade"
+TRANSITION_DURATION="1"
+
+mkdir -p "$STATE_DIR"
+
+### Functions
+start_daemon() {
+  if ! pgrep -x "awww-daemon" &>/dev/null; then
+    echo "Starting awww-daemon..."
+    awww-daemon &
+    sleep 1
+  fi
+}
+
+set_wallpaper() {
+  local wallpaper="$1"
+
+  if [[ "$wallpaper" == "random" ]]; then
+    if [[ ! -d "$WALL_DIR" ]]; then
+      echo "ERROR: Wallpaper directory not found: $WALL_DIR"
+      exit 1
+    fi
+    wallpaper=$(find "$WALL_DIR" -type f \( -iname "*.jpg" -o -iname "*.png" -o -iname "*.jpeg" -o -iname "*.webp" \) | shuf -n 1)
+  fi
+
+  if [[ ! -f "$wallpaper" ]]; then
+    local test_path="$WALL_DIR/$wallpaper"
+    if [[ -f "$test_path" ]]; then
+      wallpaper="$test_path"
+    else
+      echo "ERROR: Wallpaper not found: $wallpaper"
+      exit 1
+    fi
+  fi
+
+  start_daemon
+  awww img "$wallpaper" --transition-type "$TRANSITION_TYPE" --transition-duration "$TRANSITION_DURATION"
+
+  echo "$wallpaper" >"$STATE_FILE"
+  echo "✓ Wallpaper set: $(basename "$wallpaper")"
+}
+
+restore_wallpaper() {
+  if [[ -f "$STATE_FILE" ]]; then
+    local last_wallpaper=$(cat "$STATE_FILE")
+    if [[ -f "$last_wallpaper" ]]; then
+      set_wallpaper "$last_wallpaper"
+      return 0
+    fi
+  fi
+  echo "No saved wallpaper found. Setting random..."
+  set_wallpaper "random"
+}
+
+# Rofi wallpaper picker with thumbnails (your original style)
+rofi_picker() {
+  if ! command -v rofi &>/dev/null; then
+    echo "ERROR: rofi not installed"
+    exit 1
+  fi
+
+  if [[ ! -d "$WALL_DIR" ]]; then
+    echo "ERROR: Wallpaper directory not found: $WALL_DIR"
+    exit 1
+  fi
+
+  # Build menu with icons (thumbnail paths)
+  local menu_items=()
+  while IFS= read -r img; do
+    name="$(basename "$img")"
+    # Rofi icon format: name\x00icon\x1f/path/to/image
+    menu_items+=("$name\x00icon\x1f$img")
+  done < <(find "$WALL_DIR" -type f \( -iname "*.jpg" -o -iname "*.png" -o -iname "*.jpeg" -o -iname "*.webp" \) | sort)
+
+  if ((${#menu_items[@]} == 0)); then
+    echo "ERROR: No wallpapers found in $WALL_DIR"
+    exit 1
+  fi
+
+  # Show rofi menu with icons
+  local chosen
+  chosen=$(printf "%b\n" "${menu_items[@]}" | rofi \
+    -show-icons \
+    -i \
+    -dmenu \
+    -theme "$ROFI_THEME" \
+    -p "BuBulove")
+
+  [[ -z "$chosen" ]] && exit 0
+
+  # Find the selected wallpaper
+  local wallpaper
+  wallpaper=$(find "$WALL_DIR" -type f -iname "$chosen" -print -quit)
+
+  if [[ -n "$wallpaper" ]]; then
+    set_wallpaper "$wallpaper"
+  else
+    echo "ERROR: Wallpaper not found: $chosen"
+    exit 1
+  fi
+}
+
+### Main
+main() {
+  case "${1:-}" in
+  --random | -r)
+    set_wallpaper "random"
+    ;;
+  --restore | -s)
+    restore_wallpaper
+    ;;
+  --rofi | -p)
+    rofi_picker
+    ;;
+  --help | -h)
+    echo "Usage: wallpaper.sh [OPTION] [WALLPAPER]"
+    echo ""
+    echo "Options:"
+    echo "  -r, --random     Set random wallpaper"
+    echo "  -s, --restore    Restore last wallpaper"
+    echo "  -p, --rofi       Open Rofi wallpaper picker (with thumbnails)"
+    echo "  -h, --help       Show this help"
+    echo ""
+    echo "Examples:"
+    echo "  wallpaper.sh --rofi"
+    echo "  wallpaper.sh --random"
+    echo "  wallpaper.sh dearsunset.jpg"
+    ;;
+  "")
+    restore_wallpaper
+    ;;
+  *)
+    set_wallpaper "$1"
+    ;;
+  esac
+}
+
+main "$@"

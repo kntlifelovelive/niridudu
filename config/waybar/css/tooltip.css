@@ -1,0 +1,17 @@
+/*
+ * ============================================================
+ * TOOLTIP
+ * ============================================================
+ */
+
+tooltip {
+    background: @tooltip-bg;
+    color: @tooltip-fg;
+
+    padding: 12px 18px;
+    margin: 8px 2px;
+
+    border-radius: 6px;
+
+    font-size: 13px;
+}

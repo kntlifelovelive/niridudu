@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Adjust output scale
+set -euo pipefail
+
+mode="${1:-+}"
+
+case "$mode" in
+    "+")
+        niri msg action set-monitor-scale +0.1 2>/dev/null || true
+        ;;
+    "-")
+        niri msg action set-monitor-scale -0.1 2>/dev/null || true
+        ;;
+    *)
+        niri msg action set-monitor-scale "$mode" 2>/dev/null || true
+        ;;
+esac

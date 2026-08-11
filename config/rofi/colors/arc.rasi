@@ -1,0 +1,16 @@
+//  ┌────────────────────────────────────────────┐
+//  │ AuthorModify : KyawNyeinThant              │
+//  │ Github       : kntlifelovelive             │
+//  │ Date         : 2026 , March, 12            │
+//  │ Colors       : Arc                         │
+//  └────────────────────────────────────────────┘
+
+* {
+    background:     rgba(47,52,63,0.45);
+    background-alt: rgba(56,60,74,0.45);
+    foreground:     #BAC5D0FF;
+    selected:       #5294E2FF;
+    active:         #98C379FF;
+    urgent:         #E06B74FF;
+}
+

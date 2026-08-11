@@ -1,0 +1,13 @@
+{
+  "name": "nord",
+  "variant": "dark",
+  "gtk-theme": "Nordic-darker",
+  "icon-theme": "Papirus-Dark",
+  "cursor-theme": "Bibata-Modern-Ice",
+  "wallpaper-color": "#2e3440",
+  "wallpapers": [
+    "snow-mountain.jpg",
+    "ice-lake.jpg",
+    "polar-night.jpg"
+  ]
+}

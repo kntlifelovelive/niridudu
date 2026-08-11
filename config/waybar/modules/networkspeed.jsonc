@@ -1,0 +1,9 @@
+{
+  "custom/netspeed": {
+    "exec": "~/.config/waybar/scripts/netspeed.sh",
+    "interval": 1,
+    "format": "{}",
+    "markup": "pango",
+    "tooltip": true
+  }
+}

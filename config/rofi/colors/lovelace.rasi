@@ -1,0 +1,15 @@
+//  ┌────────────────────────────────────────────┐
+//  │ AuthorModify : KyawNyeinThant              │
+//  │ Github       : kntlifelovelive             │
+//  │ Date         : 2026 , March, 12            │
+//  │ Colors       : LoveLace                    │
+//  └────────────────────────────────────────────┘
+
+* {
+    background:     rgba(29,31,40,0.45);
+    background-alt: rgba(40,42,54,0.45);
+    foreground:     #FDFDFDFF;
+    selected:       #79E6F3FF;
+    active:         #5ADECDFF;
+    urgent:         #F37F97FF;
+}

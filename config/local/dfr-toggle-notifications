@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Toggle notifications on/off using mako
+set -euo pipefail
+
+if makoctl mode | grep -q "do-not-disturb"; then
+    makoctl mode -r do-not-disturb
+    notify-send "Notifications" "Enabled"
+else
+    makoctl mode -a do-not-disturb
+fi

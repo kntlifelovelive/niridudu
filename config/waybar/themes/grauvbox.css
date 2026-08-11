@@ -1,0 +1,76 @@
+/*
+ * ============================================================
+ * GRUVBOX DARK
+ * ============================================================
+ */
+
+/* ------------------------------------------------------------
+ * Base
+ * ------------------------------------------------------------ */
+
+@define-color bar-bg rgba(29, 32, 33, 0.90);
+@define-color module-bg rgba(60, 56, 54, 0.95);
+@define-color fg #ebdbb2;
+@define-color clock-fg #fbf1c7;
+
+/* ------------------------------------------------------------
+ * Hover
+ * ------------------------------------------------------------ */
+
+@define-color hover-bg #d79921;
+@define-color hover-fg #282828;
+
+/* ------------------------------------------------------------
+ * Network
+ * ------------------------------------------------------------ */
+
+@define-color netspeed-fg #83a598;
+
+/* ------------------------------------------------------------
+ * Workspace
+ * ------------------------------------------------------------ */
+
+@define-color workspace-bg rgba(60, 56, 54, 0.95);
+@define-color workspace-fg #b8bb26;
+@define-color workspace-active-fg #b8bb26;
+@define-color workspace-active-border #b8bb26;
+@define-color workspace-empty-fg #fbf1c7;
+@define-color workspace-empty-active-fg #fbf1c7;
+
+/* ------------------------------------------------------------
+ * Audio
+ * ------------------------------------------------------------ */
+
+@define-color muted-bg #fabd2f;
+@define-color muted-fg #282828;
+
+/* ------------------------------------------------------------
+ * Battery
+ * ------------------------------------------------------------ */
+
+@define-color langtext #0db9d7;
+@define-color battery-charging #b8bb26;
+@define-color battery-warning #fabd2f;
+@define-color battery-critical #fb4934;
+
+/* ------------------------------------------------------------
+ * Power
+ * ------------------------------------------------------------ */
+
+@define-color power-fg #fb4934;
+@define-color power-hover #ff0000;
+
+/* ------------------------------------------------------------
+ * Media
+ * ------------------------------------------------------------ */
+
+@define-color media-fg #ebdbb2;
+@define-color media-animation #8ec07c;
+@define-color media-time #fbf1c7;
+
+/* ------------------------------------------------------------
+ * Tooltip
+ * ------------------------------------------------------------ */
+
+@define-color tooltip-bg rgba(29, 32, 33, 0.95);
+@define-color tooltip-fg #ebdbb2;

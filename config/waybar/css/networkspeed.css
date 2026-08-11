@@ -1,0 +1,27 @@
+/*
+ * ============================================================
+ * NETWORK SPEED
+ * ============================================================
+ */
+
+#custom-netspeed {
+    background: transparent;
+
+    padding: 0 10px;
+    margin: 2px 2px;
+
+    color: @netspeed-fg;
+
+    font-size: 13px;
+    font-weight: bold;
+
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+}
+
+
+#custom-netspeed:hover {
+    background: @hover-bg;
+    color: @hover-fg;
+}

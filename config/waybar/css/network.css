@@ -1,0 +1,29 @@
+/*
+ * ============================================================
+ * NETWORK
+ * ============================================================
+ */
+
+#network {
+    background: @module-bg;
+
+    min-width: 20px;
+
+    padding: 0 16px;
+    margin: 2px 2px;
+
+    border-radius: 4px;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+}
+
+
+#network:hover {
+    background: @hover-bg;
+    color: @hover-fg;
+}

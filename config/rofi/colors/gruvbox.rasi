@@ -1,0 +1,15 @@
+//  ┌────────────────────────────────────────────┐
+//  │ AuthorModify : KyawNyeinThant              │
+//  │ Github       : kntlifelovelive             │
+//  │ Date         : 2026 , March, 12            │
+//  │ Colors       : Gruvbox                     │
+//  └────────────────────────────────────────────┘
+
+* {
+    background:     rgba(40,40,40,0.45);
+    background-alt: rgba(53,53,53,0.45);
+    foreground:     #EBDBB2FF;
+    selected:       #83A598FF;
+    active:         #B8BB26FF;
+    urgent:         #FB4934FF;
+}

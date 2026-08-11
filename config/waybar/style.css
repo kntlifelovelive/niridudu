@@ -1,0 +1,33 @@
+/*
+ * ============================================================
+ * WAYBAR
+ * Main Stylesheet
+ * ============================================================
+ */
+
+
+/* Theme */
+@import "themes/current_theme.css";
+
+
+/* Core */
+@import "css/global.css";
+
+
+/* Modules */
+@import "css/workspace.css";
+@import "css/clock.css";
+@import "css/language.css";
+@import "css/networkspeed.css";
+@import "css/network.css";
+@import "css/audio.css";
+@import "css/backlight.css";
+@import "css/battery.css";
+@import "css/tools.css";
+@import "css/power.css";
+@import "css/media.css";
+@import "css/tooltip.css";
+
+
+/* Tooltip */
+@import "css/tooltip.css";

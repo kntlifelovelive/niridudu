@@ -1,0 +1,8 @@
+{
+  "niri/language": {
+    "format-en": "US",
+    "format-mm": "Burma",
+    "on-click": "~/.local/bin/keyboardlayout",
+    "signal": 1
+  }
+}

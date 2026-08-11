@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# Theme setter
+# Usage: dfr-theme-set [--menu] [theme-name]
+set -euo pipefail
+
+MODE="${1:-}"
+THEME="${2:-}"
+
+if [[ "$MODE" == "--menu" ]]; then
+  exec "$HOME/.local/bin/themeSwitch" --rofi
+fi
+
+if [[ -n "$THEME" ]]; then
+  exec "$HOME/.local/bin/themeSwitch" "$THEME"
+fi
+
+# Default: cycle themes
+CURRENT="$($HOME/.local/bin/themeSwitch --current 2>/dev/null || echo none)"
+case "$CURRENT" in
+tokyonight) NEXT=catppuccin ;;
+catppuccin) NEXT=gruvbox ;;
+*) NEXT=tokyonight ;;
+esac
+exec "$HOME/.local/bin/themeSwitch" "$NEXT"

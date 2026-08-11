@@ -1,0 +1,94 @@
+#!/usr/bin/env bash
+
+# ┌────────────────────────────────────────────┐
+# │              Power D-Menu                  │
+# └────────────────────────────────────────────┘
+
+# Rofi power menu with keyboard navigation (k/j + up/down)
+# Confirm Bash Script for Power Menu
+
+set -o errexit
+set -o pipefail
+set -o nounset
+
+chosen=$(
+  echo -e " Lock\n󰽥 Suspend\n󰍃 Logout\n󰜉 Reboot\n󰐥 Shutdown" |
+    rofi \
+      -dmenu \
+      -i \
+      -markup-rows \
+      -p "Power D-Menu" \
+      -kb-row-up "Up,Control+p,k" \
+      -kb-row-down "Down,Control+n,j" \
+      -theme-str '
+window {
+    width: 300px;
+    padding: 20px;
+    border-radius: 2px;
+    border: 1px;
+    border-color: #7aa2f7;
+    background-color: rgba(26,27,38,0.92);
+}
+
+listview {
+    lines: 5;
+    fixed-height: true;
+    scrollbar: false;
+    spacing: 6px;
+    background-color: rgba(26,27,38,0.92);
+}
+
+element {
+    padding: 12px 16px;
+    border-radius: 8px;
+    background-color: rgba(26,27,38,0.92);
+    text-color: #cdd6f4;
+    font: "JetBrainsMono Bold 16";
+}
+
+element selected {
+    background-color: rgba(122,162,247,0.30);
+    text-color: #ffffff;
+    border: 1px;
+    border-color: #7aa2f7;
+}
+
+element icon {
+    size: 2.2em;
+    vertical-align: 0.2em;
+}
+
+prompt {
+    text-color: #7dcfff;
+    font: "JetBrainsMono Bold 18";
+    padding: 0px 0px 12px 0px;
+    horizontal-align: 0.5;
+}
+
+inputbar {
+    children: [ prompt ];
+}
+
+entry {
+    placeholder: "";
+}
+'
+)
+
+case "${chosen}" in
+" Lock")
+  swaylock
+  ;;
+"󰽥 Suspend")
+  systemctl suspend
+  ;;
+"󰍃 Logout")
+  uwsm stop
+  ;;
+"󰜉 Reboot")
+  systemctl reboot
+  ;;
+"󰐥 Shutdown")
+  systemctl poweroff
+  ;;
+esac

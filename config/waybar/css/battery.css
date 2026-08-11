@@ -1,0 +1,71 @@
+/*
+ * ============================================================
+ * BATTERY
+ * ============================================================
+ */
+
+#battery {
+    background: @module-bg;
+
+    min-width: 14px;
+
+    padding: 0 16px;
+    margin: 2px 2px;
+
+    border-radius: 4px;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+}
+
+
+#battery:hover {
+    background: @hover-bg;
+    color: @hover-fg;
+}
+
+
+/* ------------------------------------------------------------
+ * Battery states
+ * ------------------------------------------------------------ */
+
+#battery.charging {
+    color: @battery-charging;
+}
+
+
+#battery.warning {
+    color: @battery-warning;
+}
+
+
+#battery.critical {
+    color: @battery-critical;
+}
+
+
+/* ------------------------------------------------------------
+ * Battery drawer
+ * ------------------------------------------------------------ */
+
+#battery-drawer {
+    background: @module-bg;
+
+    margin: 2px 2px;
+
+    border-radius: 4px;
+
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+}
+
+
+#battery-drawer:hover {
+    background: @hover-bg;
+    color: @hover-fg;
+}

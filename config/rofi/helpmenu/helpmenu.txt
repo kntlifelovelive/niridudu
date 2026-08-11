@@ -1,0 +1,228 @@
+<big><b>Kitty Terminal Customize Keybinds</b></big>
+<small>Ctrl+W</small>                   = Kitty Terminal Quit
+<small>Ctrl+Alt+Enter</small>           = Vertical split
+<small>Ctrl+Alt+Shift+Enter</small>     = Horizontal split
+<small>Alt+H</small>                    = Focus left
+<small>Alt+L</small>                    = Focus right
+<small>Ctrl+Up</small>                  = Focus up
+<small>Ctrl+Down</small>                = Focus down
+<small>Ctrl+W</small>                   = Close Kitty window
+<small>Ctrl+Shift+R</small>             = Next layout
+<small>Ctrl+Alt+R</small>               = Previous layout
+<small>Alt+T</small>                    = New tab
+<small>Ctrl+Shift+L</small>             = Next tab
+<small>Ctrl+Shift+H</small>             = Previous tab
+<small>Alt+W</small>                    = Close tab
+<small>Ctrl+Shift+Alt+L</small>         = Move tab forward
+<small>Ctrl+Shift+Alt+H</small>         = Move tab backward
+<small>Ctrl+Shift+Q</small>             = Quit Kitty
+<small>Ctrl+Shift+R</small>             = Reload Kitty config
+<small>Ctrl+Shift+C</small>             = Copy
+<small>Ctrl+Shift+V</small>             = Paste
+
+<big><b>Zsh Customize Config</b></big>
+<small>jk</small>                       = Exit Zsh insert
+<small>Ctrl+Space</small>               = Accept autosuggestion
+
+<small>Ctrl+F</small>                   = Folder Search FzF Finder
+<small>Ctrl+T</small>                   = File Search FzF Finder
+<small>Ctrl+R</small>                   = Comands History FzF Finder
+
+<small>Ctrl+P</small>                   = Arch Package Local List
+<small>Ctrl+Y</small>                   = Arch Package yay Install
+<small>Ctrl+V</small>                   = Arch Package Remove
+<small>Ctrl+S</small>                   = Arch Package Search
+
+
+
+<big><b>Main Overview</b></big>
+<small>Super + Alt + H</small>               = Help Menu Customize
+<small>Super + Grave (`)</small>             = System Menu (Power Menu)
+<small>Super + V</small>                     = Search Copy History Choice Walker Window
+<small>Super + W/</small>                    = Applications History Launcher Walker
+<small>Super + Space +</small>               = Keyboard Layout Switcher
+
+
+<big><b>Themes Wallpapers</b></big>
+<small>Super + Alt + K</small>               = Kitty Themes Switcher
+<small>Super + Ctrl + I</small>              = Icon Themes Switcher
+<small>Super + Ctrl + \</small>              = Global GTK Themes Switcher
+<small>Super + \</small>                     = Wallpaper Switcher
+<small>Super + Shift + W</small>             = Waybar Css Themes Switcher
+
+<big><b>Waybar</b></big>
+<small>Super + R</small>                     = Waybar Reload
+
+<big><b>Launcher</b></big>
+<small>Super + D</small>                     = Applications Launcher
+<small>Super + W</small>                     = Launcher (Windows)
+<small>Super + V</small>                     = Launcher (Clipboard)
+
+<big><b>System</b></big>
+<small>Super + Alt + L</small>               = Lock Screen
+<small>Super + Shift + Alt + L</small>       = Power Off Monitors
+<small>Super + Ctrl + Shift + Q</small>      = Exit Niri Session
+
+<big><b>Capture</b></big>
+<small>Super + S</small>                     = Screenshot (Region)
+<small>Super + Shift + S</small>             = Screenshot (Window)
+<small>Super + Ctrl + S</small>              = Screenshot (Monitor Focused)
+<small>Super + Ctrl + Shift + S</small>      = Screenshot (All Monitors)
+<small>Super + P</small>                     = Pick Window
+<small>Super + Shift + P</small>             = Pick Color
+<small>Super + Shift + E</small>             = Cast Focused Window
+
+<big><b>Notifications</b></big>
+<small>Super + N</small>                     = Show Last Notification
+<small>Super + Shift + N</small>             = Dismiss Last Notification
+<small>Super + Ctrl + N</small>              = Dismiss All Notifications
+<small>Super + Ctrl + Shift + N</small>      = Toggle Silencing Notifications
+
+<big><b>Applications</b></big>
+<small>Super + Shift + H</small>             = System Health
+<small>Super + T</small>                     = Kitty (Terminal)
+<small>Super + E</small>                     = File Manager (Nautilus)
+<small>Super + Alt + Shift + T</small>       = Terminal Floating (Ghostty)
+<small>Super + Alt + N</small>               = Notes
+<small>Super + Alt + Shift + N</small>       = Notes Directory
+<small>Super + Alt + P</small>               = Passwords (KeePassXC)
+<small>Super + Alt + Shift + P</small>       = Generate Random Password
+<small>Super + Alt + M</small>               = Music (RMPC)
+<small>Super + Alt + B</small>               = Browser (Firefox)
+<small>Super + Alt + Shift + B</small>       = Browser Private (Firefox)
+<small>Super + Alt + Ctrl + Shift + B</small> = Browser Isolated Profile
+
+<big><b>Display Scaling</b></big>
+<small>Super + Ctrl + Shift + =</small>      = Increase Monitor Scale
+<small>Super + Ctrl + Shift + -</small>      = Decrease Monitor Scale
+<small>Super + Ctrl + Shift + 0</small>      = Reset Monitor Scale
+
+<big><b>Window - Column Behavior</b></big>
+<small>Super + Q</small>                     = Close Window
+<small>Super + C</small>                     = Center Column
+<small>Super + Ctrl + C</small>              = Center All Visible Columns
+<small>Super + Z</small>                     = Toggle Floating Window
+<small>Super + Ctrl + Z</small>              = Switch Focus Floating/Tiling
+<small>Super + [</small>                     = Move Window Left (Consume/Expel)
+<small>Super + ]</small>                     = Move Window Right (Consume/Expel)
+<small>Super + ,</small>                     = Move Right Window Under Column
+<small>Super + .</small>                     = Remove Bottom Window From Column
+
+<big><b>Window Column Sizes</b></big>
+<small>Super + F</small>                     = Maximize Column
+<small>Super + Shift + F</small>             = Full Screen Window
+<small>Super + Ctrl + F</small>              = Fill Empty Column Space
+<small>Super + Shift + R</small>             = Cycle Preset Heights
+<small>Super + Ctrl + R</small>              = Reset Window Height
+<small>Super + =</small>                     = Increase Column Width (+10%)
+<small>Super + -</small>                     = Decrease Column Width (-10%)
+<small>Super + Shift + =</small>             = Increase Window Height (+10%)
+<small>Super + Shift + -</small>             = Decrease Window Height (-10%)
+
+<big><b>Focus Movement</b></big>
+<small>Super + I</small>                     = Focus Previous Window
+<small>Super + Left / H</small>              = Focus Column Left
+<small>Super + Down / J</small>              = Focus Column Down
+<small>Super + Up / K</small>                = Focus Column Up
+<small>Super + Right / L</small>             = Focus Column Right
+<small>Super + G / Home</small>              = Focus First Column
+<small>Super + ; / End</small>               = Focus Last Column
+
+<big><b>Move Column</b></big>
+<small>Super + Ctrl + Left / H</small>       = Move Column Left
+<small>Super + Ctrl + Down / J</small>       = Move Column Down
+<small>Super + Ctrl + Up / K</small>         = Move Column Up
+<small>Super + Ctrl + Right / L</small>      = Move Column Right
+<small>Super + Ctrl + G / Home</small>       = Move Column To First
+<small>Super + Ctrl + ; / End</small>        = Move Column To Last
+
+<big><b>Multi-Monitor</b></big>
+<small>Super + Ctrl + Shift + Left / H</small>  = Move Column To Left Monitor
+<small>Super + Ctrl + Shift + Down / J</small>  = Move Column To Lower Monitor
+<small>Super + Ctrl + Shift + Up / K</small>    = Move Column To Upper Monitor
+<small>Super + Ctrl + Shift + Right / L</small> = Move Column To Right Monitor
+
+<big><b>Mouse Wheel Controls</b></big>
+<small>Super + WheelScrollDown</small>       = Focus Column Right
+<small>Super + WheelScrollUp</small>         = Focus Column Left
+<small>Super + Ctrl + WheelScrollDown</small> = Move Column Right
+<small>Super + Ctrl + WheelScrollUp</small>   = Move Column Left
+<small>Super + WheelScrollRight</small>       = Focus Column Right
+<small>Super + WheelScrollLeft</small>        = Focus Column Left
+<small>Super + Ctrl + WheelScrollRight</small> = Move Column Right
+<small>Super + Ctrl + WheelScrollLeft</small>  = Move Column Left
+
+<big><b>Mouse Button Controls</b></big>
+<small>Super + MouseBack</small>              = Focus Left Monitor
+<small>Super + MouseForward</small>           = Focus Right Monitor
+<small>Super + Ctrl + Shift + MouseBack</small> = Move Column To Left Monitor
+<small>Super + Ctrl + Shift + MouseForward</small> = Move Column To Right Monitor
+
+<big><b>Workspaces - Focus</b></big>
+<small>Super + Shift + WheelScrollDown</small> = Focus Next Workspace
+<small>Super + Shift + WheelScrollUp</small>   = Focus Previous Workspace
+<small>Super + D / Page_Down</small>          = Focus Next Workspace
+<small>Super + U / Page_Up</small>            = Focus Previous Workspace
+<small>Super + 1</small>                      = Focus Workspace 1
+<small>Super + 2</small>                      = Focus Workspace 2
+<small>Super + 3</small>                      = Focus Workspace 3
+<small>Super + 4</small>                      = Focus Workspace 4
+<small>Super + 5</small>                      = Focus Workspace 5
+<small>Super + 6</small>                      = Focus Workspace 6
+<small>Super + 7</small>                      = Focus Workspace 7
+<small>Super + 8</small>                      = Focus Workspace 8
+<small>Super + 9</small>                      = Focus Workspace 9
+
+<big><b>Workspaces - Move Column</b></big>
+<small>Super + Ctrl + Shift + WheelScrollDown</small> = Move Column To Next Workspace
+<small>Super + Ctrl + Shift + WheelScrollUp</small>   = Move Column To Previous Workspace
+<small>Super + Ctrl + D / Page_Down</small>   = Move Column To Next Workspace
+<small>Super + Ctrl + U / Page_Up</small>     = Move Column To Previous Workspace
+<small>Super + Ctrl + 1</small>               = Move Column To Workspace 1
+<small>Super + Ctrl + 2</small>               = Move Column To Workspace 2
+<small>Super + Ctrl + 3</small>               = Move Column To Workspace 3
+<small>Super + Ctrl + 4</small>               = Move Column To Workspace 4
+<small>Super + Ctrl + 5</small>               = Move Column To Workspace 5
+<small>Super + Ctrl + 6</small>               = Move Column To Workspace 6
+<small>Super + Ctrl + 7</small>               = Move Column To Workspace 7
+<small>Super + Ctrl + 8</small>               = Move Column To Workspace 8
+<small>Super + Ctrl + 9</small>               = Move Column To Workspace 9
+
+<big><b>Workspaces - Move Window</b></big>
+<small>Super + Shift + 1</small>              = Move Window To Workspace 1
+<small>Super + Shift + 2</small>              = Move Window To Workspace 2
+<small>Super + Shift + 3</small>              = Move Window To Workspace 3
+<small>Super + Shift + 4</small>              = Move Window To Workspace 4
+<small>Super + Shift + 5</small>              = Move Window To Workspace 5
+<small>Super + Shift + 6</small>              = Move Window To Workspace 6
+<small>Super + Shift + 7</small>              = Move Window To Workspace 7
+<small>Super + Shift + 8</small>              = Move Window To Workspace 8
+<small>Super + Shift + 9</small>              = Move Window To Workspace 9
+
+<big><b>Workspaces - Move Workspace</b></big>
+<small>Super + Shift + D / Page_Down</small>  = Move Workspace Down
+<small>Super + Shift + U / Page_Up</small>    = Move Workspace Up
+
+<big><b>Other</b></big>
+<small>Super + Escape</small>                 = Toggle Keyboard Shortcuts Inhibit
+
+<big><b>Media Keys - Volume</b></big>
+<small>XF86AudioRaiseVolume</small>           = Raise Volume (+5%)
+<small>XF86AudioLowerVolume</small>           = Lower Volume (-5%)
+<small>XF86AudioMute</small>                  = Mute Playback
+<small>XF86AudioMicMute</small>               = Mute Microphone
+
+<big><b>Media Keys - Playback</b></big>
+<small>XF86AudioPlay</small>                  = Play / Pause Track
+<small>XF86AudioStop</small>                  = Stop Track
+<small>XF86AudioPrev</small>                  = Previous Track
+<small>XF86AudioNext</small>                  = Next Track
+<small>Shift + XF86AudioPrev</small>          = Seek -10 Seconds
+<small>Shift + XF86AudioNext</small>          = Seek +10 Seconds
+
+<big><b>Media Keys - Brightness</b></big>
+<small>XF86MonBrightnessUp</small>            = Increase Brightness (+5%)
+<small>XF86MonBrightnessDown</small>          = Decrease Brightness (-5%)
+
+<big><b>Media Keys - Other</b></big>
+<small>XF86Calculator</small>                 = Launcher (Calculator)

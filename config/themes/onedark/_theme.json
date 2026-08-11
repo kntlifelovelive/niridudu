@@ -1,0 +1,13 @@
+{
+  "name": "onedark",
+  "variant": "dark",
+  "gtk-theme": "One-Dark",
+  "icon-theme": "Papirus-Dark",
+  "cursor-theme": "Bibata-Modern-Ice",
+  "wallpaper-color": "#282c34",
+  "wallpapers": [
+    "city-night.jpg",
+    "abstract-dark.jpg",
+    "fog.jpg"
+  ]
+}

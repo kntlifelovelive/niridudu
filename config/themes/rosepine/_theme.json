@@ -1,0 +1,13 @@
+{
+  "name": "rose-pine",
+  "variant": "dark",
+  "gtk-theme": "Rose-Pine-Main",
+  "icon-theme": "Papirus-Dark",
+  "cursor-theme": "Bibata-Modern-Ice",
+  "wallpaper-color": "#191724",
+  "wallpapers": [
+    "rose-night.jpg",
+    "moon-flowers.jpg",
+    "misty-forest.jpg"
+  ]
+}

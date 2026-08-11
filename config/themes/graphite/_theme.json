@@ -1,0 +1,13 @@
+{
+  "name": "graphite",
+  "variant": "dark",
+  "gtk-theme": "Graphite-Dark",
+  "icon-theme": "Tela-circle-dark",
+  "cursor-theme": "Bibata-Modern-Classic",
+  "wallpaper-color": "#2b2b2b",
+  "wallpapers": [
+    "minimal-dark.jpg",
+    "black-rock.jpg",
+    "foggy-hills.jpg"
+  ]
+}

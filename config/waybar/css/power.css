@@ -1,0 +1,65 @@
+/*
+ * ============================================================
+ * POWER / SESSION
+ * ============================================================
+ */
+
+
+/* ------------------------------------------------------------
+ * Power group
+ * ------------------------------------------------------------ */
+
+#group-power {
+    background: transparent;
+
+    margin: 0;
+}
+
+
+/* ------------------------------------------------------------
+ * Power buttons
+ * ------------------------------------------------------------ */
+
+#custom-power,
+#custom-quit,
+#custom-lock,
+#custom-reboot {
+    background: @module-bg;
+
+    min-width: 14px;
+
+    padding: 0 16px;
+    margin: 2px 2px;
+
+    border-radius: 4px;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+}
+
+
+#custom-power:hover,
+#custom-quit:hover,
+#custom-lock:hover,
+#custom-reboot:hover {
+    background: @hover-bg;
+    color: @hover-fg;
+}
+
+
+/* ------------------------------------------------------------
+ * Shutdown
+ * ------------------------------------------------------------ */
+
+#custom-power {
+    color: @power-fg;
+}
+
+
+#custom-power:hover {
+    color: @power-hover;
+}

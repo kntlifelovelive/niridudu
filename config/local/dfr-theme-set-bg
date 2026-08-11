@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Theme wallpaper setter
+# Usage: dfr-theme-set-bg [--menu] [--keep-current]
+set -euo pipefail
+
+MODE="${1:-}"
+
+if [[ "$MODE" == "--menu" ]]; then
+    exec "$HOME/.local/bin/wallpaper" --rofi
+fi
+
+if [[ "$MODE" == "--keep-current" ]]; then
+    exec "$HOME/.local/bin/wallpaper" --restore
+fi
+
+# Default: random wallpaper
+exec "$HOME/.local/bin/wallpaper" --random

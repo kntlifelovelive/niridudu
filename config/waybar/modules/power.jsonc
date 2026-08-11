@@ -1,0 +1,48 @@
+{
+  "group/group-power": {
+    "orientation": "horizontal",
+    "modules": [
+      "custom/power",
+      "custom/quit",
+      "custom/lock",
+      "custom/reboot"
+    ]
+  },
+  "custom/power": {
+    "format": "",
+    "tooltip": true,
+    "tooltip-format": "Shutdown",
+    "on-click": "bash ~/.config/waybar/scripts/power.sh --shutdown"
+  },
+  "custom/quit": {
+    "format": "󰗼",
+    "tooltip": true,
+    "tooltip-format": "Logout",
+    "on-click": "bash ~/.config/waybar/scripts/power.sh --logout"
+  },
+  "custom/lock": {
+    "format": "󰍁",
+    "tooltip": true,
+    "tooltip-format": "Lock",
+    "on-click": "bash ~/.config/waybar/scripts/power.sh --lock"
+  },
+  "custom/reboot": {
+    "format": "󰜉",
+    "tooltip": true,
+    "tooltip-format": "Reboot",
+    "on-click": "bash ~/.config/waybar/scripts/power.sh --reboot"
+  },
+  "group/battery-drawer": {
+    "orientation": "horizontal",
+    "drawer": {
+      "transition-duration": 400,
+      "children-class": "battery-drawer",
+      "open": "hover",
+      "transition-left-to-right": false
+    },
+    "modules": [
+      "battery",
+      "group/group-power"
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+//  ┌────────────────────────────────────────────┐
+//  │ AuthorModify : KyawNyeinThant              │
+//  │ Github       : kntlifelovelive             │
+//  │ Date         : 2026 , March, 12            │
+//  │ Colors       : Adapta                      │
+//  └────────────────────────────────────────────┘
+
+* {
+    background:     rgba(34,45,50,0.45);
+    background-alt: rgba(41,53,59,0.45);
+    foreground:     #B8C2C6FF;
+    selected:       #00BCD4FF;
+    active:         #FF4B60FF;
+    urgent:         #21FF90FF;
+}
+
+

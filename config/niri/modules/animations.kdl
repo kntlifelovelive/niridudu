@@ -1,0 +1,80 @@
+// ▄▀█ █▄░█ █ █▀▄▀█ ▄▀█ ▀█▀ █ █▀█ █▄░█
+// █▀█ █░▀█ █ █░▀░█ █▀█ ░█░ █ █▄█ █░▀█
+// ┌────────────────────────────────────────────┐
+// │              Niri Animations               │
+// └────────────────────────────────────────────┘
+
+
+animations {
+
+    // Overall speed
+    slowdown 1.4
+
+    // Workspace switching
+    workspace-switch {
+        spring damping-ratio=0.75 stiffness=650 epsilon=0.0001
+    }
+
+
+    // New window spawn
+    window-open {
+        duration-ms 180
+        curve "ease-out-expo"
+    }
+
+
+    // Closing window
+    window-close {
+        duration-ms 150
+        curve "ease-out-quad"
+    }
+
+
+    // Moving columns horizontally
+    horizontal-view-movement {
+        spring damping-ratio=0.9 stiffness=850 epsilon=0.0001
+    }
+
+
+    // Window moving
+    window-movement {
+        spring damping-ratio=0.85 stiffness=800 epsilon=0.0001
+    }
+
+
+    // Resize animation
+    window-resize {
+        spring damping-ratio=0.85 stiffness=800 epsilon=0.0001
+    }
+
+
+    // Niri config reload notification
+    config-notification-open-close {
+        spring damping-ratio=0.7 stiffness=1000 epsilon=0.001
+    }
+
+
+    // Quit confirmation
+    exit-confirmation-open-close {
+        spring damping-ratio=0.7 stiffness=600 epsilon=0.01
+    }
+
+
+    // Screenshot overlay
+    screenshot-ui-open {
+        duration-ms 200
+        curve "ease-out-quad"
+    }
+
+
+    // Overview (Super + O)
+    overview-open-close {
+        spring damping-ratio=0.85 stiffness=750 epsilon=0.0001
+    }
+
+
+    // Recent windows animation
+    recent-windows-close {
+        spring damping-ratio=0.9 stiffness=800 epsilon=0.001
+    }
+}

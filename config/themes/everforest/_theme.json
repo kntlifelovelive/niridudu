@@ -1,0 +1,13 @@
+{
+  "name": "everforest",
+  "variant": "dark",
+  "gtk-theme": "Everforest-Dark",
+  "icon-theme": "Tela-circle-dark",
+  "cursor-theme": "Bibata-Modern-Ice",
+  "wallpaper-color": "#2d353b",
+  "wallpapers": [
+    "green-forest.jpg",
+    "mist.jpg",
+    "river.jpg"
+  ]
+}

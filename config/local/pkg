@@ -1,0 +1,867 @@
+#!/usr/bin/env bash
+
+# ┌──────────────────────────────────────────────────────────────┐
+# │ Author : KyawNyeinThant                                      │
+# │ Script : pkg - Arch Linux Package Manager + fzf UI           │
+# │ Date   : 2026                                                │
+# └──────────────────────────────────────────────────────────────┘
+
+set -o errexit
+set -o pipefail
+set -o nounset
+
+export LC_ALL=C
+
+CMD=""
+AUR=0
+QUERY=""
+
+###############################################################################
+# Helpers
+###############################################################################
+
+die() {
+  printf '%s\n' "$*" >&2
+  exit 1
+}
+
+require_cmd() {
+  command -v "$1" >/dev/null 2>&1 ||
+    die "Required command not found: $1"
+}
+
+###############################################################################
+# Arch Linux Check
+###############################################################################
+
+if [[ -r /etc/os-release ]]; then
+  # shellcheck disable=SC1091
+  source /etc/os-release
+
+  [[ "${ID:-}" == "arch" || "${ID_LIKE:-}" == *arch* ]] ||
+    die "This script is only available on Arch Linux."
+else
+  die "/etc/os-release not found."
+fi
+
+###############################################################################
+# Usage
+###############################################################################
+
+usage() {
+  cat <<'EOF'
+Usage:
+
+    pkg install [query]
+    pkg install --aur [query]
+
+    pkg upgrade
+    pkg upgrade --aur
+
+    pkg list [query]
+    pkg list --aur [query]
+
+    pkg search [query]
+    pkg search --aur [query]
+
+    pkg remove [query]
+    pkg remove --aur [query]
+
+    pkg outdated
+    pkg outdated --aur
+
+    pkg news
+    pkg news q
+
+    # Zsh Keybinds
+    # ===================
+    Ctrl + P  → pkg list
+    Ctrl + V  → pkg remove
+    Ctrl + R  → Zsh history search
+
+Description:
+
+    install
+        Search packages and print an install command.
+
+    upgrade
+        Upgrade the complete system.
+
+    list
+        Search installed packages and print a remove command.
+
+    search
+        Search repository packages.
+
+    remove
+        Search installed packages and print a remove command.
+
+    outdated
+        Show outdated packages.
+
+    news
+        Show Arch Linux news.
+
+
+Examples:
+
+    pkg install
+    pkg install btop
+
+    pkg install --aur
+    pkg install --aur brave-bin
+
+    pkg upgrade
+    pkg upgrade --aur
+
+    pkg list
+    pkg list btop
+
+    pkg list --aur
+
+    pkg search
+    pkg search btop
+
+    pkg search --aur
+
+    pkg remove
+    pkg remove btop
+
+    pkg remove --aur
+EOF
+}
+
+###############################################################################
+# Argument Parser
+###############################################################################
+
+while [[ $# -gt 0 ]]; do
+
+  case "$1" in
+
+  -h | --help | help)
+    usage
+    exit 0
+    ;;
+
+  -a | --aur)
+    AUR=1
+    shift
+    ;;
+
+  *)
+    if [[ -z "$CMD" ]]; then
+      CMD="$1"
+
+    elif [[ -z "$QUERY" ]]; then
+      QUERY="$1"
+
+    elif [[ "$CMD" == "news" && "$1" == "q" ]]; then
+      shift
+      break
+
+    else
+      printf 'Unknown argument: %s\n\n' "$1" >&2
+      usage >&2
+      exit 1
+    fi
+
+    shift
+    ;;
+
+  esac
+
+done
+
+[[ -n "$CMD" ]] || {
+  usage >&2
+  exit 1
+}
+
+###############################################################################
+# FZF UI
+###############################################################################
+
+fzf_opts() {
+  # Return FZF options as an array
+  cat <<'EOF'
+--layout=reverse
+--height=89%
+--border=rounded
+--header-first
+--header=󰏖  Package Finder  |   Enter: |  Tab: |  Esc:
+--prompt=    Search >
+--pointer=➜
+--marker=✓
+--bind=j:down
+--bind=k:up
+--bind=ctrl-d:preview-page-down
+--bind=ctrl-u:preview-page-up
+--preview-window=right:65%:wrap:border-left
+EOF
+}
+
+###############################################################################
+# Extract Package Name
+###############################################################################
+
+package_name() {
+
+  awk -F ' :: ' '
+        {
+            print $1
+            exit
+        }
+    '
+}
+
+###############################################################################
+# Installed Official Packages
+#
+# IMPORTANT:
+#
+# pacman -Qei is executed ONLY ONCE.
+#
+# This is much faster than running:
+#
+# pacman -Qi package
+# pacman -Qi package
+# pacman -Qi package
+#
+###############################################################################
+
+installed_packages() {
+  pacman -Qei |
+    awk '
+            /^Name[[:space:]]*:/ {
+                name = $3
+            }
+
+            /^Description[[:space:]]*:/ {
+                desc = $0
+                pos = index(desc, ":")
+                desc = substr(desc, pos + 1)
+
+                sub(/^[[:space:]]+/, "", desc)
+            }
+
+            /^$/ {
+                if (name != "") {
+                    printf "%s :: %s\n", name, desc
+                }
+
+                name = ""
+                desc = ""
+            }
+
+            END {
+                if (name != "") {
+                    printf "%s :: %s\n", name, desc
+                }
+            }
+        '
+}
+
+###############################################################################
+# Installed AUR Packages
+#
+# pacman -Qmq gives AUR / foreign packages.
+#
+# Then pacman -Qei is executed once and filtered with awk.
+###############################################################################
+
+installed_aur_packages() {
+  local aur_names
+
+  aur_names="$(pacman -Qmq)"
+
+  [[ -n "$aur_names" ]] || return 0
+
+  pacman -Qei |
+    awk -v aur="$aur_names" '
+            BEGIN {
+                count = split(aur, lines, "\n")
+
+                for (i = 1; i <= count; i++) {
+                    isaur[lines[i]] = 1
+                }
+            }
+
+            /^Name[[:space:]]*:/ {
+                name = $3
+            }
+
+            /^Description[[:space:]]*:/ {
+                desc = $0
+                pos = index(desc, ":")
+                desc = substr(desc, pos + 1)
+
+                sub(/^[[:space:]]+/, "", desc)
+            }
+
+            /^$/ {
+                if (name != "" && isaur[name]) {
+                    printf "%s :: %s\n", name, desc
+                }
+
+                name = ""
+                desc = ""
+            }
+
+            END {
+                if (name != "" && isaur[name]) {
+                    printf "%s :: %s\n", name, desc
+                }
+            }
+        '
+}
+
+###############################################################################
+# Official Repository Packages
+###############################################################################
+
+repository_packages() {
+  local query="${1:-}"
+
+  if [[ -z "$query" ]]; then
+    # Show all packages if no query
+    pacman -Sl 2>/dev/null | awk '{print $2 " :: " $3}'
+  else
+    pacman -Ss "$query" 2>/dev/null |
+      awk '
+            /^[^ ]+\/[^ ]+ / {
+                pkg = $1
+                sub(/^[^/]+\//, "", pkg)
+                desc = $0
+                sub(/^[^ ]+ /, "", desc)
+                printf "%s :: %s\n", pkg, desc
+            }
+        '
+  fi
+}
+
+###############################################################################
+# AUR Packages
+###############################################################################
+
+aur_packages() {
+  local query="$1"
+
+  if [[ -z "$query" ]]; then
+    # Show all AUR packages if no query
+    yay -Sl 2>/dev/null | awk '{print $2 " :: " $3}'
+  else
+    yay -Ssa "$query" 2>/dev/null |
+      awk '
+            /^[^ ]/ {
+                pkg = $1
+                sub(/^[^/]+\//, "", pkg)
+                next
+            }
+
+            /^[[:space:]]/ {
+                desc = $0
+                sub(/^[[:space:]]+/, "", desc)
+
+                if (pkg != "") {
+                    printf "%s :: %s\n", pkg, desc
+                }
+
+                pkg = ""
+            }
+        '
+  fi
+}
+
+###############################################################################
+# Generic FZF Picker
+###############################################################################
+
+pick() {
+
+  local data="$1"
+  local preview="$2"
+  local query="${3:-}"
+
+  local selected
+
+  # Read FZF options from function into array
+  mapfile -t fzf_options < <(fzf_opts)
+
+  selected="$(
+    printf '%s\n' "$data" |
+      fzf \
+        "${fzf_options[@]}" \
+        --query="$query" \
+        --preview="$preview" \
+        --multi
+  )"
+
+  printf '%s\n' "$selected"
+}
+
+###############################################################################
+# Convert Selection → Command
+###############################################################################
+
+print_command() {
+
+  local selected="$1"
+  local action="$2"
+  local backend="$3"
+
+  local packages
+
+  [[ -n "$selected" ]] ||
+    return 0
+
+  packages="$(
+    printf '%s\n' "$selected" |
+      cut -d ':' -f 1 |
+      xargs
+  )"
+
+  [[ -n "$packages" ]] ||
+    return 0
+
+  case "$action:$backend" in
+
+  install:pacman)
+
+    printf \
+      'sudo pacman -S --needed %s\n' \
+      "$packages"
+    ;;
+
+  install:yay)
+
+    printf \
+      'yay -S --needed %s\n' \
+      "$packages"
+    ;;
+
+  remove:pacman)
+
+    printf \
+      'sudo pacman -Rns %s\n' \
+      "$packages"
+    ;;
+
+  remove:yay)
+
+    printf \
+      'yay -Rns %s\n' \
+      "$packages"
+    ;;
+
+  esac
+}
+
+###############################################################################
+# Install Official
+###############################################################################
+
+install_official() {
+
+  local data
+  local selected
+
+  require_cmd pacman
+  require_cmd fzf
+
+  # If no query provided, show all packages
+  if [[ -z "$QUERY" ]]; then
+    printf '    No search query provided. Showing all packages...\n' >&2
+  fi
+
+  data="$(
+    repository_packages "$QUERY"
+  )"
+
+  [[ -n "$data" ]] || {
+    printf 'No packages found.\n' >&2
+    return 0
+  }
+
+  selected="$(
+    pick \
+      "$data" \
+      '
+                pkg=$(echo {} |
+                    cut -d ":" -f 1 |
+                    xargs)
+
+                pacman -Si "$pkg" 2>/dev/null
+            ' \
+      "$QUERY"
+  )"
+
+  print_command \
+    "$selected" \
+    install \
+    pacman
+}
+
+###############################################################################
+# Install AUR
+###############################################################################
+
+install_aur() {
+
+  local data
+  local selected
+
+  require_cmd yay
+  require_cmd fzf
+
+  # If no query provided, show all AUR packages
+  if [[ -z "$QUERY" ]]; then
+    printf '    No search query provided. Showing all AUR packages...\n' >&2
+  fi
+
+  data="$(
+    aur_packages "$QUERY"
+  )"
+
+  [[ -n "$data" ]] || {
+    printf 'No AUR packages found.\n' >&2
+    return 0
+  }
+
+  selected="$(
+    pick \
+      "$data" \
+      '
+                pkg=$(echo {} |
+                    cut -d ":" -f 1 |
+                    xargs)
+
+                yay -Si "$pkg" 2>/dev/null
+            ' \
+      "$QUERY"
+  )"
+
+  print_command \
+    "$selected" \
+    install \
+    yay
+}
+
+###############################################################################
+# List Installed Official
+#
+# Enter → sudo pacman -Rns package
+###############################################################################
+
+list_official() {
+
+  local data
+  local selected
+
+  require_cmd pacman
+  require_cmd fzf
+
+  data="$(
+    installed_packages
+  )"
+
+  [[ -n "$data" ]] ||
+    return 0
+
+  selected="$(
+    pick \
+      "$data" \
+      '
+                pkg=$(echo {} |
+                    cut -d ":" -f 1 |
+                    xargs)
+
+                pacman -Qi "$pkg" 2>/dev/null
+            ' \
+      "$QUERY"
+  )"
+
+  print_command \
+    "$selected" \
+    remove \
+    pacman
+}
+
+###############################################################################
+# List Installed AUR
+#
+# Enter → yay -Rns package
+###############################################################################
+
+list_aur() {
+
+  local data
+  local selected
+
+  require_cmd pacman
+  require_cmd fzf
+
+  data="$(
+    installed_aur_packages
+  )"
+
+  [[ -n "$data" ]] || {
+
+    printf \
+      'No AUR packages installed.\n' \
+      >&2
+
+    return 0
+  }
+
+  selected="$(
+    pick \
+      "$data" \
+      '
+                pkg=$(echo {} |
+                    cut -d ":" -f 1 |
+                    xargs)
+
+                pacman -Qi "$pkg" 2>/dev/null
+            ' \
+      "$QUERY"
+  )"
+
+  print_command \
+    "$selected" \
+    remove \
+    yay
+}
+
+###############################################################################
+# Search Official
+###############################################################################
+
+search_official() {
+
+  local data
+  local selected
+
+  require_cmd pacman
+  require_cmd fzf
+
+  # If no query provided, show all packages
+  if [[ -z "$QUERY" ]]; then
+    printf '    No search query provided. Showing all packages...\n' >&2
+  fi
+
+  data="$(
+    repository_packages "$QUERY"
+  )"
+
+  [[ -n "$data" ]] || {
+
+    printf \
+      'No packages found.\n' \
+      >&2
+
+    return 0
+  }
+
+  selected="$(
+    pick \
+      "$data" \
+      '
+                pkg=$(echo {} |
+                    cut -d ":" -f 1 |
+                    xargs)
+
+                pacman -Si "$pkg" 2>/dev/null
+            ' \
+      "$QUERY"
+  )"
+
+  [[ -n "$selected" ]] &&
+    printf '%s\n' "$selected" |
+    package_name
+}
+
+###############################################################################
+# Search AUR
+###############################################################################
+
+search_aur() {
+
+  local data
+  local selected
+
+  require_cmd yay
+  require_cmd fzf
+
+  # If no query provided, show all AUR packages
+  if [[ -z "$QUERY" ]]; then
+    printf '    No search query provided. Showing all AUR packages...\n' >&2
+  fi
+
+  data="$(
+    aur_packages "$QUERY"
+  )"
+
+  [[ -n "$data" ]] || {
+
+    printf \
+      'No AUR packages found.\n' \
+      >&2
+
+    return 0
+  }
+
+  selected="$(
+    pick \
+      "$data" \
+      '
+                pkg=$(echo {} |
+                    cut -d ":" -f 1 |
+                    xargs)
+
+                yay -Si "$pkg" 2>/dev/null
+            ' \
+      "$QUERY"
+  )"
+
+  [[ -n "$selected" ]] &&
+    printf '%s\n' "$selected" |
+    package_name
+}
+
+###############################################################################
+# Upgrade
+###############################################################################
+
+upgrade() {
+
+  if ((AUR)); then
+
+    require_cmd yay
+
+    printf '    Upgrading AUR packages...\n' >&2
+    yay -Syu
+
+  else
+
+    require_cmd pacman
+
+    printf '    Upgrading system packages...\n' >&2
+    sudo pacman -Syu
+
+  fi
+}
+
+###############################################################################
+# Outdated
+###############################################################################
+
+outdated() {
+
+  require_cmd checkupdates
+
+  printf '    Checking for outdated packages...\n' >&2
+  checkupdates || true
+}
+
+###############################################################################
+# AUR Outdated
+###############################################################################
+
+outdated_aur() {
+
+  require_cmd yay
+
+  printf '    Checking for outdated AUR packages...\n' >&2
+  yay -Qua || true
+}
+
+###############################################################################
+# Arch News
+###############################################################################
+
+show_news() {
+
+  require_cmd yay
+
+  yay -Pww"${1:-}" || true
+
+  printf '\n'
+  printf 'Official Arch Linux News:\n'
+  printf '%s\n' \
+    'https://archlinux.org/news/'
+}
+
+###############################################################################
+# Command Dispatcher
+###############################################################################
+
+case "$CMD" in
+
+install)
+
+  if ((AUR)); then
+    install_aur
+  else
+    install_official
+  fi
+  ;;
+
+upgrade)
+
+  upgrade
+  ;;
+
+list)
+
+  if ((AUR)); then
+    list_aur
+  else
+    list_official
+  fi
+  ;;
+
+search)
+
+  if ((AUR)); then
+    search_aur
+  else
+    search_official
+  fi
+  ;;
+
+remove)
+
+  if ((AUR)); then
+    list_aur
+  else
+    list_official
+  fi
+  ;;
+
+outdated)
+
+  if ((AUR)); then
+    outdated_aur
+  else
+    outdated
+  fi
+  ;;
+
+news)
+
+  show_news "${1:-}"
+  ;;
+
+*)
+
+  printf \
+    'Unknown command: %s\n\n' \
+    "$CMD" >&2
+
+  usage >&2
+
+  exit 1
+  ;;
+
+esac

@@ -1,0 +1,15 @@
+//  ┌────────────────────────────────────────────┐
+//  │ AuthorModify : KyawNyeinThant              │
+//  │ Github       : kntlifelovelive             │
+//  │ Date         : 2026 , March, 12            │
+//  │ Colors       : Cyberpunk                   │
+//  └────────────────────────────────────────────┘
+
+* {
+    background:     rgba(0,11,30,0.45);
+    background-alt: rgba(10,21,40,0.45);
+    foreground:     #0ABDC6FF;
+    selected:       #0ABDC6FF;
+    active:         #00FF00FF;
+    urgent:         #FF0000FF;
+}

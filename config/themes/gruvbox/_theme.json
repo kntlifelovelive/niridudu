@@ -1,0 +1,13 @@
+{
+  "name": "gruvbox",
+  "variant": "dark",
+  "gtk-theme": "Gruvbox-Dark",
+  "icon-theme": "Gruvbox-Dark",
+  "cursor-theme": "Bibata-Modern-Ice",
+  "wallpaper-color": "#1a1a1a",
+  "wallpapers": [
+    "spooky-triangle.jpg",
+    "and-so-it-begins.jpg",
+    "asian-urban-mystery.jpg"
+  ]
+}

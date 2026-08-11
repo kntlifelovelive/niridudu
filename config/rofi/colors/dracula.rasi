@@ -1,0 +1,15 @@
+//  ┌────────────────────────────────────────────┐
+//  │ AuthorModify : KyawNyeinThant              │
+//  │ Github       : kntlifelovelive             │
+//  │ Date         : 2026 , March, 12            │
+//  │ Colors       : Dracula                     │
+//  └────────────────────────────────────────────┘
+
+* {
+    background:     rgba(30,31,41,0.45);
+    background-alt: rgba(40,42,54,0.45);
+    foreground:     #FFFFFFFF;
+    selected:       #BD93F9FF;
+    active:         #50FA7BFF;
+    urgent:         #FF5555FF;
+}

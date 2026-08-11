@@ -1,0 +1,16 @@
+// █░░ ▄▀█ █░█ █▄░█ █▀▀ █░█
+// █▄▄ █▀█ █▄█ █░▀█ █▄▄ █▀█
+
+
+
+spawn-at-startup "awww-daemon"
+spawn-at-startup "swayidle" "-w"
+spawn-at-startup "mako"
+spawn-at-startup "waybar"
+spawn-at-startup "elephant"
+spawn-at-startup "walker" "--gapplication-service"
+spawn-sh-at-startup "sleep 1; exec mpd-mpris"
+spawn-at-startup "ibus-deamon" "-drx"
+
+spawn-at-startup "nm-applet"
+spawn-at-startup "blueman-applet"

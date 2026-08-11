@@ -1,0 +1,48 @@
+/////////////////////////////////
+//                             //
+//  Waybar main configuration  //
+//                             //
+/////////////////////////////////
+{
+  "layer": "top",
+  "position": "top",
+  "height": 30,
+  "spacing": 2,
+  "margin-top": 0,
+  "margin-bottom": 0,
+  // =========================
+  // Module order
+  // =========================
+  "modules-left": [
+    "niri/workspaces",
+    "group/media"
+  ],
+  "modules-center": [
+    "clock"
+  ],
+  "modules-right": [
+    "custom/netspeed",
+    "niri/language",
+    "pulseaudio",
+    "group/group-tools",
+    "group/battery-drawer"
+  ],
+  // =========================
+  // Module definitions
+  // =========================
+  "include": [
+    "~/.config/waybar/modules/workspace.jsonc",
+    "~/.config/waybar/modules/clock.jsonc",
+    "~/.config/waybar/modules/language.jsonc",
+    "~/.config/waybar/modules/networkspeed.jsonc",
+    "~/.config/waybar/modules/network.jsonc",
+    "~/.config/waybar/modules/pulseaudio.jsonc",
+    "~/.config/waybar/modules/backlight.jsonc",
+    "~/.config/waybar/modules/battery.jsonc",
+    "~/.config/waybar/modules/tray.jsonc",
+    "~/.config/waybar/modules/screenshot.jsonc",
+    "~/.config/waybar/modules/tools.jsonc",
+    "~/.config/waybar/modules/power.jsonc",
+    "~/.config/waybar/modules/media.jsonc"
+  ]
+}

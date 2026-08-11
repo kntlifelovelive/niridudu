@@ -1,0 +1,33 @@
+{
+  "pulseaudio": {
+    "tooltip": false,
+    "format": "{volume}% {icon}",
+    "format-bluetooth": "{volume}% {icon}",
+    "format-bluetooth-muted": "{icon} {format_source}",
+    "format-muted": " {format_source}",
+    "format-source": "",
+    "format-source-muted": "",
+    "format-icons": {
+      "headphone": "",
+      "headset": "",
+      "hands-free": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "usb": "",
+      "analog-output": "",
+      "analog-output-headphones": "",
+      "analog-output-speaker": "🔊",
+      "default": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "scroll-step": 1,
+    "ignored-sinks": [
+      "Easy Effects Sink"
+    ],
+    "on-click": "pavucontrol"
+  }
+}

@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Generate a random password and copy to clipboard
+set -euo pipefail
+
+if command -v pwgen &>/dev/null; then
+    pwgen -s -y 20 1 | wl-copy
+elif command -v openssl &>/dev/null; then
+    openssl rand -base64 15 | tr -d '\n' | wl-copy
+else
+    head -c 20 /dev/urandom | base64 | tr -d '\n' | wl-copy
+fi
+
+notify-send "Password" "Generated and copied to clipboard"

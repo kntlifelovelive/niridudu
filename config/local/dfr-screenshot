@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# Screenshot utility using grim + slurp + satty
+set -euo pipefail
+
+mode="${1:-region}"
+cd /tmp
+
+case "$mode" in
+    region)
+        grim -g "$(slurp)" - | satty --filename - --output-filename /tmp/screenshot.png
+        ;;
+    window)
+        grim -g "$(swaymsg -t get_tree 2>/dev/null | jq -r '.. | select(.focused? == true) | .rect | "\(.x),\(.y) \(.width)x\(.height)"')" - | satty --filename - --output-filename /tmp/screenshot.png
+        ;;
+    monitor-focused)
+        grim -o "$(niri msg --json focused-monitor 2>/dev/null | jq -r '.name // "HDMI-A-1"')" - | satty --filename - --output-filename /tmp/screenshot.png
+        ;;
+    monitor-all)
+        grim - | satty --filename - --output-filename /tmp/screenshot.png
+        ;;
+    *)
+        echo "Usage: dfr-screenshot [region|window|monitor-focused|monitor-all]"
+        exit 1
+        ;;
+esac

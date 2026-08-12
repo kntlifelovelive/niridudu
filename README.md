@@ -90,7 +90,7 @@ chmod +x install.sh install/*.sh
 
 <br>
 
-##Main Overview
+## Main Overview
 
 | Keybind               | Action                                 |
 | --------------------- | -------------------------------------- |
@@ -251,7 +251,7 @@ chmod +x install.sh install/*.sh
 | **Super + U / Page_Up**   | Focus Previous Workspace |
 | **Super + 1-9**           | Focus Workspace 1-9      |
 
-##Workspaces - Move Column
+## Workspaces - Move Column
 
 | Keybind                          | Action                            |
 | -------------------------------- | --------------------------------- |
@@ -265,14 +265,14 @@ chmod +x install.sh install/*.sh
 | ----------------------- | ---------------------------- |
 | **Super + Shift + 1-9** | Move Window To Workspace 1-9 |
 
-## 🔄 Workspaces - Move Workspace
+## Workspaces - Move Workspace
 
 | Keybind                           | Action              |
 | --------------------------------- | ------------------- |
 | **Super + Shift + D / Page_Down** | Move Workspace Down |
 | **Super + Shift + U / Page_Up**   | Move Workspace Up   |
 
-## 🎛️ Media Keys - Volume
+## Media Keys - Volume
 
 | Keybind                  | Action             |
 | ------------------------ | ------------------ |
@@ -281,7 +281,7 @@ chmod +x install.sh install/*.sh
 | **XF86AudioMute**        | Mute Playback      |
 | **XF86AudioMicMute**     | Mute Microphone    |
 
-## ⏯️ Media Keys - Playback
+## Media Keys - Playback
 
 | Keybind                   | Action             |
 | ------------------------- | ------------------ |
@@ -292,7 +292,7 @@ chmod +x install.sh install/*.sh
 | **Shift + XF86AudioPrev** | Seek -10 Seconds   |
 | **Shift + XF86AudioNext** | Seek +10 Seconds   |
 
-## ☀️ Media Keys - Brightness
+## Media Keys - Brightness
 
 | Keybind                   | Action                    |
 | ------------------------- | ------------------------- |
@@ -305,7 +305,7 @@ chmod +x install.sh install/*.sh
 | ------------------ | --------------------- |
 | **XF86Calculator** | Launcher (Calculator) |
 
-## 🖥️ Terminal (Kitty) Keybinds
+## Terminal (Kitty) Keybinds
 
 | Keybind                  | Action                    |
 | ------------------------ | ------------------------- |
@@ -322,7 +322,7 @@ chmod +x install.sh install/*.sh
 | **Ctrl+Shift+Q**         | Quit Kitty                |
 | **Ctrl+Shift+C / V**     | Copy / Paste              |
 
-## ⚡ Zsh Keybinds
+## Zsh Keybinds
 
 | Keybind        | Action                     |
 | -------------- | -------------------------- |

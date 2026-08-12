@@ -299,7 +299,7 @@ chmod +x install.sh install/*.sh
 | **XF86MonBrightnessUp**   | Increase Brightness (+5%) |
 | **XF86MonBrightnessDown** | Decrease Brightness (-5%) |
 
-## 🖩 Media Keys - Other
+## Media Keys - Other
 
 | Keybind            | Action                |
 | ------------------ | --------------------- |

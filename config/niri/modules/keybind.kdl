@@ -17,7 +17,7 @@ binds {
   // Waybar Css Themes Switch
     Mod+Shift+W          hotkey-overlay-title="waybar-css-themes-switch" { spawn "bash" "-c"  "~/.local/bin/cssSwitch"; }
     // Applications Menu Launcher
-    Mod+D              hotkey-overlay-title="Applications-Menu-Launcher" { spawn "/home/bubu/.local/bin/appmenu"; }
+    Mod+D              hotkey-overlay-title="Applications-Menu-Launcher" { spawn "~/.local/bin/appmenu"; }
 
 
 

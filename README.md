@@ -28,7 +28,7 @@ sudo pacman -S --needed git base-devel
 
 git clone https://github.com/kntlifelovelive/niridudu.git
 
-cd niribubu
+cd niridudu
 
 chmod +x install.sh install/*.sh
 

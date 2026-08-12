@@ -26,7 +26,7 @@
 ```bash
 sudo pacman -S --needed git base-devel
 
-git clone https://github.com/kntlifelovelive/niribubu.git
+git clone https://github.com/kntlifelovelive/niridudu.git
 
 cd niribubu
 
@@ -92,249 +92,249 @@ chmod +x install.sh install/*.sh
 
 ## 🚀 Main Overview
 
-| Keybind | Action |
-|---------|--------|
-| **Super + Alt + H** | Help Menu (Keybinds) |
-| **Super + Grave (`)** | System Power Menu |
-| **Super + V** | Search Copy History (Walker) |
-| **Super + W/** | Applications/History Launcher (Walker) |
-| **Super + Space** | Keyboard Layout Switcher |
+| Keybind               | Action                                 |
+| --------------------- | -------------------------------------- |
+| **Super + Alt + H**   | Help Menu (Keybinds)                   |
+| **Super + Grave (`)** | System Power Menu                      |
+| **Super + V**         | Search Copy History (Walker)           |
+| **Super + W/**        | Applications/History Launcher (Walker) |
+| **Super + Space**     | Keyboard Layout Switcher               |
 
 ## 🎨 Themes & Wallpapers
 
-| Keybind | Action |
-|---------|--------|
-| **Super + Alt + K** | Kitty Themes Switcher |
-| **Super + Ctrl + I** | Icon Themes Switcher |
+| Keybind               | Action                     |
+| --------------------- | -------------------------- |
+| **Super + Alt + K**   | Kitty Themes Switcher      |
+| **Super + Ctrl + I**  | Icon Themes Switcher       |
 | **Super + Ctrl + \\** | Global GTK Themes Switcher |
-| **Super + \\** | Wallpaper Switcher |
+| **Super + \\**        | Wallpaper Switcher         |
 | **Super + Shift + W** | Waybar CSS Themes Switcher |
 
 ## 🖥️ Launcher
 
-| Keybind | Action |
-|---------|--------|
+| Keybind       | Action                |
+| ------------- | --------------------- |
 | **Super + D** | Applications Launcher |
-| **Super + W** | Launcher (Windows) |
-| **Super + V** | Launcher (Clipboard) |
-| **Super + R** | Waybar Reload |
+| **Super + W** | Launcher (Windows)    |
+| **Super + V** | Launcher (Clipboard)  |
+| **Super + R** | Waybar Reload         |
 
 ## ⚡ System
 
-| Keybind | Action |
-|---------|--------|
-| **Super + Alt + L** | Lock Screen |
-| **Super + Shift + Alt + L** | Power Off Monitors |
-| **Super + Ctrl + Shift + Q** | Exit Niri Session |
+| Keybind                      | Action             |
+| ---------------------------- | ------------------ |
+| **Super + Alt + L**          | Lock Screen        |
+| **Super + Shift + Alt + L**  | Power Off Monitors |
+| **Super + Ctrl + Shift + Q** | Exit Niri Session  |
 
 ## 📸 Capture
 
-| Keybind | Action |
-|---------|--------|
-| **Super + S** | Screenshot (Region) |
-| **Super + Shift + S** | Screenshot (Window) |
-| **Super + Ctrl + S** | Screenshot (Focused Monitor) |
-| **Super + Ctrl + Shift + S** | Screenshot (All Monitors) |
-| **Super + P** | Pick Window |
-| **Super + Shift + P** | Pick Color |
-| **Super + Shift + E** | Cast Focused Window |
+| Keybind                      | Action                       |
+| ---------------------------- | ---------------------------- |
+| **Super + S**                | Screenshot (Region)          |
+| **Super + Shift + S**        | Screenshot (Window)          |
+| **Super + Ctrl + S**         | Screenshot (Focused Monitor) |
+| **Super + Ctrl + Shift + S** | Screenshot (All Monitors)    |
+| **Super + P**                | Pick Window                  |
+| **Super + Shift + P**        | Pick Color                   |
+| **Super + Shift + E**        | Cast Focused Window          |
 
 ## 🔔 Notifications
 
-| Keybind | Action |
-|---------|--------|
-| **Super + N** | Show Last Notification |
-| **Super + Shift + N** | Dismiss Last Notification |
-| **Super + Ctrl + N** | Dismiss All Notifications |
+| Keybind                      | Action                         |
+| ---------------------------- | ------------------------------ |
+| **Super + N**                | Show Last Notification         |
+| **Super + Shift + N**        | Dismiss Last Notification      |
+| **Super + Ctrl + N**         | Dismiss All Notifications      |
 | **Super + Ctrl + Shift + N** | Toggle Silencing Notifications |
 
 ## 📂 Applications
 
-| Keybind | Action |
-|---------|--------|
-| **Super + Shift + H** | System Health |
-| **Super + T** | Kitty (Terminal) |
-| **Super + E** | File Manager (Nautilus) |
-| **Super + Alt + Shift + T** | Terminal Floating (Ghostty) |
-| **Super + Alt + N** | Notes |
-| **Super + Alt + Shift + N** | Notes Directory |
-| **Super + Alt + P** | Passwords (KeePassXC) |
-| **Super + Alt + Shift + P** | Generate Random Password |
-| **Super + Alt + M** | Music (RMPC) |
-| **Super + Alt + B** | Browser (Firefox) |
-| **Super + Alt + Shift + B** | Browser Private (Firefox) |
-| **Super + Alt + Ctrl + Shift + B** | Browser Isolated Profile |
+| Keybind                            | Action                      |
+| ---------------------------------- | --------------------------- |
+| **Super + Shift + H**              | System Health               |
+| **Super + T**                      | Kitty (Terminal)            |
+| **Super + E**                      | File Manager (Nautilus)     |
+| **Super + Alt + Shift + T**        | Terminal Floating (Ghostty) |
+| **Super + Alt + N**                | Notes                       |
+| **Super + Alt + Shift + N**        | Notes Directory             |
+| **Super + Alt + P**                | Passwords (KeePassXC)       |
+| **Super + Alt + Shift + P**        | Generate Random Password    |
+| **Super + Alt + M**                | Music (RMPC)                |
+| **Super + Alt + B**                | Browser (Firefox)           |
+| **Super + Alt + Shift + B**        | Browser Private (Firefox)   |
+| **Super + Alt + Ctrl + Shift + B** | Browser Isolated Profile    |
 
 ## 📐 Display Scaling
 
-| Keybind | Action |
-|---------|--------|
+| Keybind                      | Action                 |
+| ---------------------------- | ---------------------- |
 | **Super + Ctrl + Shift + =** | Increase Monitor Scale |
 | **Super + Ctrl + Shift + -** | Decrease Monitor Scale |
-| **Super + Ctrl + Shift + 0** | Reset Monitor Scale |
+| **Super + Ctrl + Shift + 0** | Reset Monitor Scale    |
 
 ## 🪟 Window - Column Behavior
 
-| Keybind | Action |
-|---------|--------|
-| **Super + Q** | Close Window |
-| **Super + C** | Center Column |
-| **Super + Ctrl + C** | Center All Visible Columns |
-| **Super + Z** | Toggle Floating Window |
-| **Super + Ctrl + Z** | Switch Focus Floating/Tiling |
-| **Super + [** | Move Window Left |
-| **Super + ]** | Move Window Right |
-| **Super + ,** | Move Right Window Under Column |
-| **Super + .** | Remove Bottom Window From Column |
+| Keybind              | Action                           |
+| -------------------- | -------------------------------- |
+| **Super + Q**        | Close Window                     |
+| **Super + C**        | Center Column                    |
+| **Super + Ctrl + C** | Center All Visible Columns       |
+| **Super + Z**        | Toggle Floating Window           |
+| **Super + Ctrl + Z** | Switch Focus Floating/Tiling     |
+| **Super + [**        | Move Window Left                 |
+| **Super + ]**        | Move Window Right                |
+| **Super + ,**        | Move Right Window Under Column   |
+| **Super + .**        | Remove Bottom Window From Column |
 
 ## 📏 Window Column Sizes
 
-| Keybind | Action |
-|---------|--------|
-| **Super + F** | Maximize Column |
-| **Super + Shift + F** | Full Screen Window |
-| **Super + Ctrl + F** | Fill Empty Column Space |
-| **Super + Shift + R** | Cycle Preset Heights |
-| **Super + Ctrl + R** | Reset Window Height |
-| **Super + =** | Increase Column Width (+10%) |
-| **Super + -** | Decrease Column Width (-10%) |
+| Keybind               | Action                        |
+| --------------------- | ----------------------------- |
+| **Super + F**         | Maximize Column               |
+| **Super + Shift + F** | Full Screen Window            |
+| **Super + Ctrl + F**  | Fill Empty Column Space       |
+| **Super + Shift + R** | Cycle Preset Heights          |
+| **Super + Ctrl + R**  | Reset Window Height           |
+| **Super + =**         | Increase Column Width (+10%)  |
+| **Super + -**         | Decrease Column Width (-10%)  |
 | **Super + Shift + =** | Increase Window Height (+10%) |
 | **Super + Shift + -** | Decrease Window Height (-10%) |
 
 ## 🎯 Focus Movement
 
-| Keybind | Action |
-|---------|--------|
-| **Super + I** | Focus Previous Window |
-| **Super + Left / H** | Focus Column Left |
-| **Super + Down / J** | Focus Column Down |
-| **Super + Up / K** | Focus Column Up |
-| **Super + Right / L** | Focus Column Right |
-| **Super + G / Home** | Focus First Column |
-| **Super + ; / End** | Focus Last Column |
+| Keybind               | Action                |
+| --------------------- | --------------------- |
+| **Super + I**         | Focus Previous Window |
+| **Super + Left / H**  | Focus Column Left     |
+| **Super + Down / J**  | Focus Column Down     |
+| **Super + Up / K**    | Focus Column Up       |
+| **Super + Right / L** | Focus Column Right    |
+| **Super + G / Home**  | Focus First Column    |
+| **Super + ; / End**   | Focus Last Column     |
 
 ## ↔️ Move Column
 
-| Keybind | Action |
-|---------|--------|
-| **Super + Ctrl + Left / H** | Move Column Left |
-| **Super + Ctrl + Down / J** | Move Column Down |
-| **Super + Ctrl + Up / K** | Move Column Up |
-| **Super + Ctrl + Right / L** | Move Column Right |
-| **Super + Ctrl + G / Home** | Move Column To First |
-| **Super + Ctrl + ; / End** | Move Column To Last |
+| Keybind                      | Action               |
+| ---------------------------- | -------------------- |
+| **Super + Ctrl + Left / H**  | Move Column Left     |
+| **Super + Ctrl + Down / J**  | Move Column Down     |
+| **Super + Ctrl + Up / K**    | Move Column Up       |
+| **Super + Ctrl + Right / L** | Move Column Right    |
+| **Super + Ctrl + G / Home**  | Move Column To First |
+| **Super + Ctrl + ; / End**   | Move Column To Last  |
 
 ## 🖥️ Multi-Monitor
 
-| Keybind | Action |
-|---------|--------|
-| **Super + Ctrl + Shift + Left / H** | Move Column To Left Monitor |
-| **Super + Ctrl + Shift + Down / J** | Move Column To Lower Monitor |
-| **Super + Ctrl + Shift + Up / K** | Move Column To Upper Monitor |
+| Keybind                              | Action                       |
+| ------------------------------------ | ---------------------------- |
+| **Super + Ctrl + Shift + Left / H**  | Move Column To Left Monitor  |
+| **Super + Ctrl + Shift + Down / J**  | Move Column To Lower Monitor |
+| **Super + Ctrl + Shift + Up / K**    | Move Column To Upper Monitor |
 | **Super + Ctrl + Shift + Right / L** | Move Column To Right Monitor |
 
 ## 🖱️ Mouse Controls
 
-| Keybind | Action |
-|---------|--------|
-| **Super + WheelScrollDown** | Focus Column Right |
-| **Super + WheelScrollUp** | Focus Column Left |
-| **Super + Ctrl + WheelScroll** | Move Column |
-| **Super + MouseBack** | Focus Left Monitor |
-| **Super + MouseForward** | Focus Right Monitor |
+| Keybind                        | Action              |
+| ------------------------------ | ------------------- |
+| **Super + WheelScrollDown**    | Focus Column Right  |
+| **Super + WheelScrollUp**      | Focus Column Left   |
+| **Super + Ctrl + WheelScroll** | Move Column         |
+| **Super + MouseBack**          | Focus Left Monitor  |
+| **Super + MouseForward**       | Focus Right Monitor |
 
 ## 🗔 Workspaces - Focus
 
-| Keybind | Action |
-|---------|--------|
-| **Super + D / Page_Down** | Focus Next Workspace |
-| **Super + U / Page_Up** | Focus Previous Workspace |
-| **Super + 1-9** | Focus Workspace 1-9 |
+| Keybind                   | Action                   |
+| ------------------------- | ------------------------ |
+| **Super + D / Page_Down** | Focus Next Workspace     |
+| **Super + U / Page_Up**   | Focus Previous Workspace |
+| **Super + 1-9**           | Focus Workspace 1-9      |
 
 ## 📦 Workspaces - Move Column
 
-| Keybind | Action |
-|---------|--------|
-| **Super + Ctrl + D / Page_Down** | Move Column To Next Workspace |
-| **Super + Ctrl + U / Page_Up** | Move Column To Previous Workspace |
-| **Super + Ctrl + 1-9** | Move Column To Workspace 1-9 |
+| Keybind                          | Action                            |
+| -------------------------------- | --------------------------------- |
+| **Super + Ctrl + D / Page_Down** | Move Column To Next Workspace     |
+| **Super + Ctrl + U / Page_Up**   | Move Column To Previous Workspace |
+| **Super + Ctrl + 1-9**           | Move Column To Workspace 1-9      |
 
 ## 📄 Workspaces - Move Window
 
-| Keybind | Action |
-|---------|--------|
+| Keybind                 | Action                       |
+| ----------------------- | ---------------------------- |
 | **Super + Shift + 1-9** | Move Window To Workspace 1-9 |
 
 ## 🔄 Workspaces - Move Workspace
 
-| Keybind | Action |
-|---------|--------|
+| Keybind                           | Action              |
+| --------------------------------- | ------------------- |
 | **Super + Shift + D / Page_Down** | Move Workspace Down |
-| **Super + Shift + U / Page_Up** | Move Workspace Up |
+| **Super + Shift + U / Page_Up**   | Move Workspace Up   |
 
 ## 🎛️ Media Keys - Volume
 
-| Keybind | Action |
-|---------|--------|
+| Keybind                  | Action             |
+| ------------------------ | ------------------ |
 | **XF86AudioRaiseVolume** | Raise Volume (+5%) |
 | **XF86AudioLowerVolume** | Lower Volume (-5%) |
-| **XF86AudioMute** | Mute Playback |
-| **XF86AudioMicMute** | Mute Microphone |
+| **XF86AudioMute**        | Mute Playback      |
+| **XF86AudioMicMute**     | Mute Microphone    |
 
 ## ⏯️ Media Keys - Playback
 
-| Keybind | Action |
-|---------|--------|
-| **XF86AudioPlay** | Play / Pause Track |
-| **XF86AudioStop** | Stop Track |
-| **XF86AudioPrev** | Previous Track |
-| **XF86AudioNext** | Next Track |
-| **Shift + XF86AudioPrev** | Seek -10 Seconds |
-| **Shift + XF86AudioNext** | Seek +10 Seconds |
+| Keybind                   | Action             |
+| ------------------------- | ------------------ |
+| **XF86AudioPlay**         | Play / Pause Track |
+| **XF86AudioStop**         | Stop Track         |
+| **XF86AudioPrev**         | Previous Track     |
+| **XF86AudioNext**         | Next Track         |
+| **Shift + XF86AudioPrev** | Seek -10 Seconds   |
+| **Shift + XF86AudioNext** | Seek +10 Seconds   |
 
 ## ☀️ Media Keys - Brightness
 
-| Keybind | Action |
-|---------|--------|
-| **XF86MonBrightnessUp** | Increase Brightness (+5%) |
+| Keybind                   | Action                    |
+| ------------------------- | ------------------------- |
+| **XF86MonBrightnessUp**   | Increase Brightness (+5%) |
 | **XF86MonBrightnessDown** | Decrease Brightness (-5%) |
 
 ## 🖩 Media Keys - Other
 
-| Keybind | Action |
-|---------|--------|
+| Keybind            | Action                |
+| ------------------ | --------------------- |
 | **XF86Calculator** | Launcher (Calculator) |
 
 ## 🖥️ Terminal (Kitty) Keybinds
 
-| Keybind | Action |
-|---------|--------|
-| **Ctrl+W** | Quit / Close Kitty Window |
-| **Ctrl+Alt+Enter** | Vertical split |
-| **Ctrl+Alt+Shift+Enter** | Horizontal split |
-| **Alt+H / Alt+L** | Focus left / right |
-| **Ctrl+Up / Ctrl+Down** | Focus up / down |
-| **Ctrl+Shift+R** | Next layout |
-| **Ctrl+Alt+R** | Previous layout |
-| **Alt+T** | New tab |
-| **Ctrl+Shift+L / H** | Next / Previous tab |
-| **Alt+W** | Close tab |
-| **Ctrl+Shift+Q** | Quit Kitty |
-| **Ctrl+Shift+C / V** | Copy / Paste |
+| Keybind                  | Action                    |
+| ------------------------ | ------------------------- |
+| **Ctrl+W**               | Quit / Close Kitty Window |
+| **Ctrl+Alt+Enter**       | Vertical split            |
+| **Ctrl+Alt+Shift+Enter** | Horizontal split          |
+| **Alt+H / Alt+L**        | Focus left / right        |
+| **Ctrl+Up / Ctrl+Down**  | Focus up / down           |
+| **Ctrl+Shift+R**         | Next layout               |
+| **Ctrl+Alt+R**           | Previous layout           |
+| **Alt+T**                | New tab                   |
+| **Ctrl+Shift+L / H**     | Next / Previous tab       |
+| **Alt+W**                | Close tab                 |
+| **Ctrl+Shift+Q**         | Quit Kitty                |
+| **Ctrl+Shift+C / V**     | Copy / Paste              |
 
 ## ⚡ Zsh Keybinds
 
-| Keybind | Action |
-|---------|--------|
-| **jk** | Exit Zsh insert mode |
-| **Ctrl+Space** | Accept autosuggestion |
-| **Ctrl+F** | Folder Search (FzF) |
-| **Ctrl+T** | File Search (FzF) |
-| **Ctrl+R** | Command History (FzF) |
-| **Ctrl+P** | Arch Package List |
-| **Ctrl+Y** | Arch Package Install (yay) |
-| **Ctrl+V** | Arch Package Remove |
-| **Ctrl+S** | Arch Package Search |
+| Keybind        | Action                     |
+| -------------- | -------------------------- |
+| **jk**         | Exit Zsh insert mode       |
+| **Ctrl+Space** | Accept autosuggestion      |
+| **Ctrl+F**     | Folder Search (FzF)        |
+| **Ctrl+T**     | File Search (FzF)          |
+| **Ctrl+R**     | Command History (FzF)      |
+| **Ctrl+P**     | Arch Package List          |
+| **Ctrl+Y**     | Arch Package Install (yay) |
+| **Ctrl+V**     | Arch Package Remove        |
+| **Ctrl+S**     | Arch Package Search        |
 
 <br>
 

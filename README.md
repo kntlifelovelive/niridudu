@@ -90,7 +90,7 @@ chmod +x install.sh install/*.sh
 
 <br>
 
-## 🚀 Main Overview
+##Main Overview
 
 | Keybind               | Action                                 |
 | --------------------- | -------------------------------------- |
@@ -100,7 +100,7 @@ chmod +x install.sh install/*.sh
 | **Super + W/**        | Applications/History Launcher (Walker) |
 | **Super + Space**     | Keyboard Layout Switcher               |
 
-## 🎨 Themes & Wallpapers
+## Themes & Wallpapers
 
 | Keybind               | Action                     |
 | --------------------- | -------------------------- |
@@ -110,7 +110,7 @@ chmod +x install.sh install/*.sh
 | **Super + \\**        | Wallpaper Switcher         |
 | **Super + Shift + W** | Waybar CSS Themes Switcher |
 
-## 🖥️ Launcher
+## Launcher
 
 | Keybind       | Action                |
 | ------------- | --------------------- |
@@ -119,7 +119,7 @@ chmod +x install.sh install/*.sh
 | **Super + V** | Launcher (Clipboard)  |
 | **Super + R** | Waybar Reload         |
 
-## ⚡ System
+## System
 
 | Keybind                      | Action             |
 | ---------------------------- | ------------------ |
@@ -127,7 +127,7 @@ chmod +x install.sh install/*.sh
 | **Super + Shift + Alt + L**  | Power Off Monitors |
 | **Super + Ctrl + Shift + Q** | Exit Niri Session  |
 
-## 📸 Capture
+## Capture
 
 | Keybind                      | Action                       |
 | ---------------------------- | ---------------------------- |
@@ -139,7 +139,7 @@ chmod +x install.sh install/*.sh
 | **Super + Shift + P**        | Pick Color                   |
 | **Super + Shift + E**        | Cast Focused Window          |
 
-## 🔔 Notifications
+## Notifications
 
 | Keybind                      | Action                         |
 | ---------------------------- | ------------------------------ |
@@ -148,7 +148,7 @@ chmod +x install.sh install/*.sh
 | **Super + Ctrl + N**         | Dismiss All Notifications      |
 | **Super + Ctrl + Shift + N** | Toggle Silencing Notifications |
 
-## 📂 Applications
+## Applications
 
 | Keybind                            | Action                      |
 | ---------------------------------- | --------------------------- |
@@ -165,7 +165,7 @@ chmod +x install.sh install/*.sh
 | **Super + Alt + Shift + B**        | Browser Private (Firefox)   |
 | **Super + Alt + Ctrl + Shift + B** | Browser Isolated Profile    |
 
-## 📐 Display Scaling
+## Display Scaling
 
 | Keybind                      | Action                 |
 | ---------------------------- | ---------------------- |
@@ -173,7 +173,7 @@ chmod +x install.sh install/*.sh
 | **Super + Ctrl + Shift + -** | Decrease Monitor Scale |
 | **Super + Ctrl + Shift + 0** | Reset Monitor Scale    |
 
-## 🪟 Window - Column Behavior
+## Window - Column Behavior
 
 | Keybind              | Action                           |
 | -------------------- | -------------------------------- |
@@ -187,7 +187,7 @@ chmod +x install.sh install/*.sh
 | **Super + ,**        | Move Right Window Under Column   |
 | **Super + .**        | Remove Bottom Window From Column |
 
-## 📏 Window Column Sizes
+## Window Column Sizes
 
 | Keybind               | Action                        |
 | --------------------- | ----------------------------- |
@@ -201,7 +201,7 @@ chmod +x install.sh install/*.sh
 | **Super + Shift + =** | Increase Window Height (+10%) |
 | **Super + Shift + -** | Decrease Window Height (-10%) |
 
-## 🎯 Focus Movement
+## Focus Movement
 
 | Keybind               | Action                |
 | --------------------- | --------------------- |
@@ -213,7 +213,7 @@ chmod +x install.sh install/*.sh
 | **Super + G / Home**  | Focus First Column    |
 | **Super + ; / End**   | Focus Last Column     |
 
-## ↔️ Move Column
+## Move Column
 
 | Keybind                      | Action               |
 | ---------------------------- | -------------------- |
@@ -224,7 +224,7 @@ chmod +x install.sh install/*.sh
 | **Super + Ctrl + G / Home**  | Move Column To First |
 | **Super + Ctrl + ; / End**   | Move Column To Last  |
 
-## 🖥️ Multi-Monitor
+## Multi-Monitor
 
 | Keybind                              | Action                       |
 | ------------------------------------ | ---------------------------- |
@@ -233,7 +233,7 @@ chmod +x install.sh install/*.sh
 | **Super + Ctrl + Shift + Up / K**    | Move Column To Upper Monitor |
 | **Super + Ctrl + Shift + Right / L** | Move Column To Right Monitor |
 
-## 🖱️ Mouse Controls
+## Mouse Controls
 
 | Keybind                        | Action              |
 | ------------------------------ | ------------------- |
@@ -243,7 +243,7 @@ chmod +x install.sh install/*.sh
 | **Super + MouseBack**          | Focus Left Monitor  |
 | **Super + MouseForward**       | Focus Right Monitor |
 
-## 🗔 Workspaces - Focus
+## Workspaces - Focus
 
 | Keybind                   | Action                   |
 | ------------------------- | ------------------------ |
@@ -251,7 +251,7 @@ chmod +x install.sh install/*.sh
 | **Super + U / Page_Up**   | Focus Previous Workspace |
 | **Super + 1-9**           | Focus Workspace 1-9      |
 
-## 📦 Workspaces - Move Column
+##Workspaces - Move Column
 
 | Keybind                          | Action                            |
 | -------------------------------- | --------------------------------- |
@@ -259,7 +259,7 @@ chmod +x install.sh install/*.sh
 | **Super + Ctrl + U / Page_Up**   | Move Column To Previous Workspace |
 | **Super + Ctrl + 1-9**           | Move Column To Workspace 1-9      |
 
-## 📄 Workspaces - Move Window
+## Workspaces - Move Window
 
 | Keybind                 | Action                       |
 | ----------------------- | ---------------------------- |

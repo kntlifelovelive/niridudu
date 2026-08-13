@@ -320,42 +320,44 @@ chmod +x install.sh install/*.sh
 </div>
 
 ```
-├── install.sh              # Main configuration (full installation)
+├── install.sh                  # Main installer
+│
 ├── install/
-│   ├── lib.sh              # Shared library
-│   ├── 00-check.sh         # System check
-│   ├── 01-yay.sh           # Yay AUR helper
-│   ├── 12-packages.sh      # ⭐ Packages (packages.txt)
-│   │                       #   ├── pacman packages
-│   │                       #   └── AUR packages
-│   ├── 03-fonts.sh         # Setup only (font cache)
-│   ├── 04-themes.sh        # Setup only (theme structure)
-│   ├── 05-zsh.sh           # zsh/plugin setup
-│   ├── 06-network.sh       # NetworkManager enable/start
-│   ├── 07-bluetooth.sh     # Bluetooth setup
-│   ├── 08-niri.sh          # Niri validation/setup
-│   ├── 09-wallpaper.sh     # Wallpaper setup
-│   ├── 11-audio.sh         # PipeWire services setup
-│   ├── 10-config.sh        # ⭐ FINAL config deployment
-│   │                       #   ├── ~/.config/niri
-│   │                       #   ├── ~/.config/waybar
-│   │                       #   ├── ~/.config/rofi
-│   │                       #   ├── ~/.config/kitty
-│   │                       #   ├── ~/.config/zsh
-│   │                       #   └── ~/.local/bin/*
-│   └── 99-finish.sh        # Summary & reboot (last)
-├── config/
-│   ├── niri/               # Niri window manager config
-│   ├── kitty/              # Kitty terminal config
-│   ├── waybar/             # Waybar status bar
-│   ├── rofi/               # Rofi launcher
-│   ├── zsh/                # Zsh config
-│   ├── walker/             # Walker launcher config
-│   ├── local/              # Local scripts (~/.local/bin)
-│   ├── themes/             # Theme collections
-│   ├── systemd/            # Systemd user services
-│   └── wallpapers/         # Wallpaper collection
-└── zshenv/                 # .zshenv template
+│   ├── lib.sh                  # Shared installer library
+│   │
+│   ├── 00-check.sh             # System prerequisites
+│   ├── 01-yay.sh               # Yay AUR helper
+│   │
+│   ├── 12-packages.sh          # ⭐ Package installation
+│   │                            #   ├── packages.txt
+│   │                            #   ├── pacman packages
+│   │                            #   └── AUR packages
+│   │
+│   ├── 03-fonts.sh             # Font setup & cache
+│   ├── 04-themes.sh            # Theme setup
+│   ├── 05-zsh.sh               # Zsh / Oh My Zsh / plugins
+│   ├── 06-network.sh           # NetworkManager
+│   ├── 07-bluetooth.sh         # Bluetooth
+│   ├── 08-niri.sh              # Niri validation
+│   ├── 09-wallpaper.sh         # Wallpaper setup
+│   ├── 11-audio.sh             # PipeWire / WirePlumber
+│   │
+│   ├── 10-config.sh             # ⭐ FINAL CONFIG DEPLOYMENT
+│   │   │                        #   ├── ~/.config/niri
+│   │   │                        #   ├── ~/.config/waybar
+│   │   │                        #   ├── ~/.config/rofi
+│   │   │                        #   ├── ~/.config/kitty
+│   │   │                        #   ├── ~/.config/zsh
+│   │   │                        #   ├── ~/.local/bin/*
+│   │   │                        #   └── ~/.zshenv
+│   │
+│   └── 99-finish.sh             # ⭐ Final system-state summary
+│                                #   ├── Packages
+│                                #   ├── Services
+│                                #   ├── Configs
+│                                #   ├── Backup
+│                                #   └── Finish / Reboot
+
 ```
 
 <br>

@@ -39,8 +39,8 @@ info() { echo -e "${C_CYAN}[INFO]${C_RESET} $1"; }
 ok() { echo -e "${C_GREEN}[OK]${C_RESET} $1"; }
 warn() { echo -e "${C_YELLOW}[WARN]${C_RESET} $1"; }
 error() {
-	echo -e "${C_RED}[ERROR]${C_RESET} $1"
-	exit 1
+  echo -e "${C_RED}[ERROR]${C_RESET} $1"
+  exit 1
 }
 
 # ═════════════════════════════════════════════
@@ -48,20 +48,20 @@ error() {
 # ═════════════════════════════════════════════
 
 run_module() {
-	local module="$1"
-	local module_path="$INSTALL_DIR/$module"
+  local module="$1"
+  local module_path="$INSTALL_DIR/$module"
 
-	if [[ ! -f "$module_path" ]]; then
-		error "Module not found: $module"
-	fi
+  if [[ ! -f "$module_path" ]]; then
+    error "Module not found: $module"
+  fi
 
-	info "Running module: $module"
+  info "Running module: $module"
 
-	if ! bash "$module_path"; then
-		error "Module failed: $module"
-	fi
+  if ! bash "$module_path"; then
+    error "Module failed: $module"
+  fi
 
-	ok "Module complete: $module"
+  ok "Module complete: $module"
 }
 
 # ═════════════════════════════════════════════
@@ -69,75 +69,75 @@ run_module() {
 # ═════════════════════════════════════════════
 
 main() {
-	# Shared installer library
-	# shellcheck source=install/lib.sh
-	source "$INSTALL_DIR/lib.sh"
+  # Shared installer library
+  # shellcheck source=install/lib.sh
+  source "$INSTALL_DIR/lib.sh"
 
-	show_banner
+  show_banner
 
-	echo -e "${C_CYAN}Backup directory:${C_RESET}"
-	echo "  $BACKUP_DIR"
-	echo ""
+  echo -e "${C_CYAN}Backup directory:${C_RESET}"
+  echo "  $BACKUP_DIR"
+  echo ""
 
-	# ── Confirmation ──────────────────────────
-	read -rp "Do you want to start the installation? (y/n): " confirm
+  # ── Confirmation ──────────────────────────
+  read -rp "Do you want to start the installation? (y/n): " confirm
 
-	if [[ ! "$confirm" =~ ^[Yy]$ ]]; then
-		echo "Installation canceled."
-		exit 0
-	fi
+  if [[ ! "$confirm" =~ ^[Yy]$ ]]; then
+    echo "Installation canceled."
+    exit 0
+  fi
 
-	echo ""
+  echo ""
 
-	# ══════════════════════════════════════════
-	# Installation Order
-	# ══════════════════════════════════════════
-	#
-	# 00-check
-	#      ↓
-	# 01-yay
-	#      ↓
-	# 12-packages
-	#      ↓
-	# setup modules
-	#      ↓
-	# 10-config (FINAL CONFIG DEPLOYMENT)
-	#      ↓
-	# 99-finish
-	#
-	# Packages are installed before all setup modules.
-	# Config deployment remains the final deployment step.
+  # ══════════════════════════════════════════
+  # Installation Order
+  # ══════════════════════════════════════════
+  #
+  # 00-check
+  #      ↓
+  # 01-yay
+  #      ↓
+  # 12-packages
+  #      ↓
+  # setup modules
+  #      ↓
+  # 10-config (FINAL CONFIG DEPLOYMENT)
+  #      ↓
+  # 99-finish
+  #
+  # Packages are installed before all setup modules.
+  # Config deployment remains the final deployment step.
 
-	local modules=(
-		"00-check.sh"
-		"01-yay.sh"
-		"12-packages.sh"
-		"03-fonts.sh"
-		"04-themes.sh"
-		"05-zsh.sh"
-		"06-network.sh"
-		"07-bluetooth.sh"
-		"08-niri.sh"
-		"09-wallpaper.sh"
-		"11-audio.sh"
-		"10-config.sh"
-	)
+  local modules=(
+    "00-check.sh"
+    "01-yay.sh"
+    "installpackages.sh"
+    "03-fonts.sh"
+    "04-themes.sh"
+    "05-zsh.sh"
+    "06-network.sh"
+    "07-bluetooth.sh"
+    "08-niri.sh"
+    "09-wallpaper.sh"
+    "11-audio.sh"
+    "10-config.sh"
+  )
 
-	# ══════════════════════════════════════════
-	# Run Modules
-	# ══════════════════════════════════════════
+  # ══════════════════════════════════════════
+  # Run Modules
+  # ══════════════════════════════════════════
 
-	for module in "${modules[@]}"; do
-		run_module "$module"
-	done
+  for module in "${modules[@]}"; do
+    run_module "$module"
+  done
 
-	# ══════════════════════════════════════════
-	# Final Summary
-	# ══════════════════════════════════════════
+  # ══════════════════════════════════════════
+  # Final Summary
+  # ══════════════════════════════════════════
 
-	run_module "99-finish.sh"
+  run_module "99-finish.sh"
 
-	ok "Installation complete!"
+  ok "Installation complete!"
 }
 
 main "$@"

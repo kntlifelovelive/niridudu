@@ -40,7 +40,7 @@ swaylock
 mako
 rofi
 fuzzel
-walker-bin
+walker
 hyprpicker
 wev
 wl-clipboard
@@ -154,22 +154,7 @@ timidity++
 tesseract-data-eng
 
 # ── AUR Packages ──
-yay-bin
-elephant-bin
-elephant-calc-bin
-elephant-clipboard-bin
-elephant-desktopapplications-bin
-elephant-files-bin
-elephant-menus-bin
-elephant-niriactions-bin
-elephant-providerlist-bin
-elephant-runner-bin
-elephant-symbols-bin
-elephant-unicode-bin
-elephant-websearch-bin
-elephant-windows-bin
 impala
-rmpcaspell
 awww
 bat
 bc
@@ -261,7 +246,6 @@ qt5ct
 qt6ct
 reflector
 ripgrep
-rmpc
 rofi
 rsync
 satty
@@ -323,4 +307,6 @@ zscroll-git
 zsh
 zsh-autosuggestions
 zsh-syntax-highlighting
-gvfs gvfs-mtp mtpfs
+gvfs
+gvfs-mtp
+mtpfs

@@ -7,9 +7,9 @@ ZSH_THEME=""
 
 plugins=(
   git
-  zsh-syntax-highlighting
   zsh-autosuggestions
   zsh-system-clipboard
+  zsh-syntax-highlighting
 )
 
 source "$ZSH/oh-my-zsh.sh"

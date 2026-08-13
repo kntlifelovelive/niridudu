@@ -1,171 +1,237 @@
 #!/usr/bin/env bash
 
 # ┌────────────────────────────────────────────┐
-# │        10 - Config Deployment              │
-# │        Copy configs to ~/.config           │
-# │        Deploy scripts to ~/.local/bin      │
-# │        Deploy .zshenv to home              │
+# │        10 - Config Deployment (FINAL)      │
+# │        Deploy all user configuration       │
+# │        Copy only - NEVER symlink            │
 # └────────────────────────────────────────────┘
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck source=install/lib.sh
 source "$SCRIPT_DIR/lib.sh"
 
-# ═════════════════════════════════════════════┐
-# │              Deploy Configs                 │
-# │        Copy config/* (except local)         │
-# │        to ~/.config                         │
-# ═════════════════════════════════════════════┘
+# ═════════════════════════════════════════════
+# Deploy Configs
+# ═════════════════════════════════════════════
+
 deploy_configs() {
-    section "Config Deployment"
+	section "Config Deployment"
 
-    if [[ ! -d "$CONFIG_DIR" ]]; then
-        warn "Config directory not found: $CONFIG_DIR"
-        return 0
-    fi
+	if [[ ! -d "$CONFIG_DIR" ]]; then
+		warn "Config directory not found: $CONFIG_DIR"
+		return 0
+	fi
 
-    mkdir -p "$HOME_CONFIG"
+	mkdir -p "$HOME_CONFIG"
 
-    type_text "⏳ Deploying configurations... " 0.005 "$C_CYAN"
-    type_spinner "Preparing config files" 1
+	type_text " Deploying configurations... " 0.005 "$C_CYAN"
+	type_spinner "Preparing config files" 1
 
-    # Count total items for progress bar
-    local total=0
-    for item in "$CONFIG_DIR"/*; do
-        [[ -e "$item" ]] && ((total++))
-    done
+	# ── Collect config items ──────────────────
+	local items=()
+	local item
+	local name
 
-    # Iterate over each top-level item in config/
-    local deployed=0
-    local count=0
+	for item in "$CONFIG_DIR"/*; do
+		[[ -e "$item" ]] || continue
 
-    for item in "$CONFIG_DIR"/*; do
-        [[ -e "$item" ]] || continue
-        ((count++))
-        local name
-        name="$(basename "$item")"
+		name="$(basename "$item")"
 
-        # Skip the 'local' folder (deployed separately to ~/.local/bin)
-        if [[ "$name" == "local" ]]; then
-            info "Skipping $name (deployed to ~/.local/bin separately)"
-            continue
-        fi
+		# local is deployed separately.
+		[[ "$name" == "local" ]] && continue
 
-        local dest="$HOME_CONFIG/$name"
+		items+=("$item")
+	done
 
-        # Backup existing config
-        if [[ -e "$dest" ]]; then
-            backup_config "$dest"
-            rm -rf "$dest"
-        fi
+	local total="${#items[@]}"
+	local deployed=0
 
-        # Copy (NOT symlink) the config
-        run cp -r "$item" "$dest"
-        ((deployed++))
+	# ── Nothing to deploy ─────────────────────
+	if ((total == 0)); then
+		warn "No configuration directories found to deploy."
+		return 0
+	fi
 
-        show_progress "$deployed" "$total" "Configs"
-        sleep 0.1
-    done
+	info "Found $total configuration items"
 
-    echo ""
-    ok "Config deployment complete ($deployed items copied)"
+	# ── Deploy ────────────────────────────────
+	for item in "${items[@]}"; do
+		name="$(basename "$item")"
+
+		local dest="$HOME_CONFIG/$name"
+
+		# Backup existing config.
+		if [[ -e "$dest" ]]; then
+			backup_config "$dest"
+			run rm -rf "$dest"
+		fi
+
+		# Copy - NOT symlink.
+		run cp -r "$item" "$dest"
+
+		((++deployed))
+
+		show_progress "$deployed" "$total" "Configs"
+
+		sleep 0.1
+	done
+
+	echo ""
+	ok "Config deployment complete ($deployed/$total items copied)"
 }
 
-# ═════════════════════════════════════════════┐
-# │              Deploy .zshenv                 │
-# │        Copy zshenv/.zshenv to ~/.zshenv     │
-# ═════════════════════════════════════════════┘
+# ═════════════════════════════════════════════
+# Deploy .zshenv
+# ═════════════════════════════════════════════
+
 deploy_zshenv() {
-    section ".zshenv Deployment"
+	section ".zshenv Deployment"
 
-    local src="$REPO_ROOT/zshenv/.zshenv"
+	local src="$REPO_ROOT/zshenv/.zshenv"
 
-    if [[ ! -f "$src" ]]; then
-        warn ".zshenv not found in repo: $src"
-        return 0
-    fi
+	if [[ ! -f "$src" ]]; then
+		warn ".zshenv not found in repo: $src"
+		return 0
+	fi
 
-    type_spinner "Deploying .zshenv" 1
+	type_spinner "Deploying .zshenv" 1
 
-    # Backup existing ~/.zshenv
-    if [[ -f "$HOME/.zshenv" ]]; then
-        backup_config "$HOME/.zshenv"
-    fi
+	if [[ -f "$HOME/.zshenv" ]]; then
+		backup_config "$HOME/.zshenv"
+	fi
 
-    # Copy (NOT symlink) .zshenv to home
-    run cp -f "$src" "$HOME/.zshenv"
-    ok ".zshenv copied to $HOME/.zshenv"
+	run cp -f "$src" "$HOME/.zshenv"
+
+	ok ".zshenv copied to $HOME/.zshenv"
 }
 
-# ═════════════════════════════════════════════┐
-# │              Deploy Local Scripts           │
-# │        Copy config/local/* to ~/.local/bin  │
-# ═════════════════════════════════════════════┘
+# ═════════════════════════════════════════════
+# Deploy Local Scripts
+# ═════════════════════════════════════════════
+
 deploy_local_scripts() {
-    section "Local Scripts Deployment"
+	section "Local Scripts Deployment"
 
-    local local_dir="$CONFIG_DIR/local"
+	local local_dir="$CONFIG_DIR/local"
 
-    if [[ ! -d "$local_dir" ]]; then
-        warn "Local scripts directory not found: $local_dir"
-        return 0
-    fi
+	if [[ ! -d "$local_dir" ]]; then
+		warn "Local scripts directory not found: $local_dir"
+		return 0
+	fi
 
-    mkdir -p "$HOME_BIN"
+	mkdir -p "$HOME_BIN"
 
-    type_spinner "Deploying local scripts" 1
+	type_spinner "Deploying local scripts" 1
 
-    # Count total scripts
-    local total=0
-    for script in "$local_dir"/*; do
-        [[ -f "$script" ]] && ((total++))
-    done
+	# ── Collect scripts ───────────────────────
+	local scripts=()
+	local script
 
-    local deployed=0
-    for script in "$local_dir"/*; do
-        [[ -f "$script" ]] || continue
-        local name
-        name="$(basename "$script")"
+	for script in "$local_dir"/*; do
+		[[ -f "$script" ]] || continue
+		scripts+=("$script")
+	done
 
-        # Copy the script to ~/.local/bin
-        run cp -f "$script" "$HOME_BIN/$name"
-        run chmod +x "$HOME_BIN/$name"
-        ((deployed++))
+	local total="${#scripts[@]}"
+	local deployed=0
 
-        show_progress "$deployed" "$total" "Scripts"
-        sleep 0.05
-    done
+	if ((total == 0)); then
+		warn "No local scripts found."
+		return 0
+	fi
 
-    echo ""
-    ok "Local scripts deployment complete ($deployed scripts)"
+	info "Found $total local scripts"
+
+	# ── Deploy ────────────────────────────────
+	for script in "${scripts[@]}"; do
+		local name
+		name="$(basename "$script")"
+
+		run cp -f "$script" "$HOME_BIN/$name"
+		run chmod +x "$HOME_BIN/$name"
+
+		((++deployed))
+
+		show_progress "$deployed" "$total" "Scripts"
+
+		sleep 0.05
+	done
+
+	echo ""
+	ok "Local scripts deployment complete ($deployed/$total scripts)"
 }
 
-# ═════════════════════════════════════════════┐
-# │              Ensure PATH                    │
-# │        Add ~/.local/bin to PATH             │
-# ═════════════════════════════════════════════┘
+# ═════════════════════════════════════════════
+# Ensure PATH
+# ═════════════════════════════════════════════
+
 ensure_path() {
-    section "PATH Configuration"
+	section "PATH Configuration"
 
-    mkdir -p "$HOME_CONFIG/environment.d"
+	mkdir -p "$HOME_CONFIG/environment.d"
 
-    # Create PATH config if it doesn't already reference ~/.local/bin
-    local path_conf="$HOME_CONFIG/environment.d/10-path.conf"
-    if [[ ! -f "$path_conf" ]] || ! grep -q "$HOME_BIN" "$path_conf" 2>/dev/null; then
-        cat > "$path_conf" <<EOF
+	local path_conf="$HOME_CONFIG/environment.d/10-path.conf"
+
+	if [[ ! -f "$path_conf" ]] ||
+		! grep -qF "$HOME_BIN" "$path_conf" 2>/dev/null; then
+
+		cat >"$path_conf" <<EOF
 PATH=$HOME_BIN:\$PATH
 EOF
-        ok "PATH configured for ~/.local/bin"
-    else
-        ok "PATH already configured"
-    fi
+
+		ok "PATH configured for ~/.local/bin"
+	else
+		ok "PATH already configured"
+	fi
 }
 
-# Run only if executed directly
+# ═════════════════════════════════════════════
+# Ask Reboot
+# ═════════════════════════════════════════════
+
+ask_reboot() {
+	echo ""
+	echo -e "${C_GREEN}═══ All configurations deployed! ═══${C_RESET}"
+	echo ""
+	echo "  Backup location: $BACKUP_DIR"
+	echo ""
+	echo "  Next steps:"
+	echo "    1. Log out and log back in (or reboot)"
+	echo "    2. Start Niri session"
+	echo "    3. Use 'theme-switch --rofi' to change themes"
+	echo "    4. Use 'wallpaper --rofi' to change wallpapers"
+	echo ""
+
+	while true; do
+		read -rp "Do you want to continue (c) or reboot (r)? [c/r]: " choice
+
+		case "$choice" in
+		[Cc]*)
+			ok "Continuing without reboot"
+			break
+			;;
+		[Rr]*)
+			info "Rebooting now..."
+			sudo reboot
+			;;
+		*)
+			warn "Please enter c or r."
+			;;
+		esac
+	done
+}
+
+# ═════════════════════════════════════════════
+# Main
+# ═════════════════════════════════════════════
+
 if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
-    deploy_configs
-    deploy_zshenv
-    deploy_local_scripts
-    ensure_path
-    ok "Config deployment complete"
+	deploy_configs
+	deploy_zshenv
+	deploy_local_scripts
+	ensure_path
+
+	ok "Config deployment complete"
+
+	ask_reboot
 fi

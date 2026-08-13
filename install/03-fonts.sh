@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
 # ┌────────────────────────────────────────────┐
-# │        03 - Fonts                          │
-# │        Install required fonts              │
+# │        03 - Fonts                           │
+# │        Setup only                          │
+# │        Font packages are installed by      │
+# │        12-packages.sh (packages.txt)        │
 # └────────────────────────────────────────────┘
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -10,48 +12,19 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/lib.sh"
 
 # ═════════════════════════════════════════════┐
-# │              Font Packages                 │
+# │              Setup Fonts                    │
+# │        Refresh font cache only (no install) │
 # ═════════════════════════════════════════════┘
-FONT_PACKAGES=(
-    "ttf-jetbrains-mono-nerd"
-    "ttf-font-awesome"
-    "noto-fonts"
-    "noto-fonts-emoji"
-    "noto-fonts-cjk"
-    "ttf-nerd-fonts-symbols"
-)
+setup_fonts() {
+	section "Fonts"
 
-# ═════════════════════════════════════════════┐
-# │              Install Fonts                 │
-# ═════════════════════════════════════════════┘
-install_fonts() {
-    section "Fonts"
-
-    info "Installing ${#FONT_PACKAGES[@]} font packages..."
-
-    local missing=()
-    for pkg in "${FONT_PACKAGES[@]}"; do
-        if ! pkg_installed "$pkg"; then
-            missing+=("$pkg")
-        fi
-    done
-
-    if ((${#missing[@]} == 0)); then
-        ok "All fonts already installed"
-    else
-        info "Installing missing fonts: ${missing[*]}"
-        run sudo pacman -S --needed --noconfirm "${missing[@]}"
-        ok "Fonts installed"
-    fi
-
-    # Update font cache
-    info "Updating font cache..."
-    run fc-cache -fv
-    ok "Font cache updated"
+	info "Updating font cache..."
+	run fc-cache -fv
+	ok "Font cache updated"
 }
 
 # Run only if executed directly
 if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
-    install_fonts
-    ok "Font setup complete"
+	setup_fonts
+	ok "Font setup complete"
 fi

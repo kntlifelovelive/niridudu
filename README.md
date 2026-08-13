@@ -32,37 +32,9 @@ cd niridudu
 
 chmod +x install.sh install/*.sh
 
-# User-level: config deployment only (no sudo)
-./install.sh
-
-# Full: packages + configs (requires sudo)
-./install.sh --full
-```
-
-<br>
-
-<div align="left">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Lexend+Giga&size=25&pause=1000&color=F5C2E7&fontWeight=bold&vCenter=true&width=435&height=25&lines=Installer+Options" width="450"/>
-</div>
-
-```bash
-# User-level config deployment (default - no sudo)
-./install.sh
-
 # Full installation (packages + configs)
-./install.sh --full
+./install.sh
 
-# Preview what would be done
-./install.sh --dry-run
-
-# Check system readiness only
-./install.sh --check
-
-# Run a specific module
-./install.sh --module 10-config
-
-# List available modules
-./install.sh --list
 ```
 
 <br>
@@ -77,7 +49,12 @@ chmod +x install.sh install/*.sh
 - **Zsh Integration** - Non-destructive setup
 - **FzF Finder** - File, folder, history search
 - **Walker Launcher** - App launcher with provider support
-- **Modular Installer** - User-level default, full auto-detection
+- **Audio Setup** - PipeWire + PipeWire-Pulse auto-enable
+- **Packages from packages.txt** - Single source (pacman + AUR) via 12-packages.sh
+- **Setup-only Modules** - Fonts, themes, zsh, network, bluetooth, niri, wallpaper, audio
+- **Final Config Deployment** - ~/.config/* + ~/.local/bin/* via 10-config.sh
+- **Modular Installer** - Full installation by default
+- **Reboot Prompt** - Continue or reboot asked at the very end
 
 <br>
 
@@ -343,21 +320,30 @@ chmod +x install.sh install/*.sh
 </div>
 
 ```
-├── install.sh              # Modular installer (user-level default)
+├── install.sh              # Main configuration (full installation)
 ├── install/
 │   ├── lib.sh              # Shared library
 │   ├── 00-check.sh         # System check
 │   ├── 01-yay.sh           # Yay AUR helper
-│   ├── 02-packages.sh      # Core packages
-│   ├── 03-fonts.sh         # Fonts
-│   ├── 04-themes.sh        # GTK themes
-│   ├── 05-zsh.sh           # Zsh setup
-│   ├── 06-network.sh       # NetworkManager
-│   ├── 07-bluetooth.sh     # Bluetooth
-│   ├── 08-niri.sh          # Niri config
-│   ├── 09-wallpaper.sh     # Wallpaper system
-│   ├── 10-config.sh        # Config deployment (user-level)
-│   └── 99-finish.sh        # Summary & reboot
+│   ├── 12-packages.sh      # ⭐ Packages (packages.txt)
+│   │                       #   ├── pacman packages
+│   │                       #   └── AUR packages
+│   ├── 03-fonts.sh         # Setup only (font cache)
+│   ├── 04-themes.sh        # Setup only (theme structure)
+│   ├── 05-zsh.sh           # zsh/plugin setup
+│   ├── 06-network.sh       # NetworkManager enable/start
+│   ├── 07-bluetooth.sh     # Bluetooth setup
+│   ├── 08-niri.sh          # Niri validation/setup
+│   ├── 09-wallpaper.sh     # Wallpaper setup
+│   ├── 11-audio.sh         # PipeWire services setup
+│   ├── 10-config.sh        # ⭐ FINAL config deployment
+│   │                       #   ├── ~/.config/niri
+│   │                       #   ├── ~/.config/waybar
+│   │                       #   ├── ~/.config/rofi
+│   │                       #   ├── ~/.config/kitty
+│   │                       #   ├── ~/.config/zsh
+│   │                       #   └── ~/.local/bin/*
+│   └── 99-finish.sh        # Summary & reboot (last)
 ├── config/
 │   ├── niri/               # Niri window manager config
 │   ├── kitty/              # Kitty terminal config
@@ -369,7 +355,6 @@ chmod +x install.sh install/*.sh
 │   ├── themes/             # Theme collections
 │   ├── systemd/            # Systemd user services
 │   └── wallpapers/         # Wallpaper collection
-├── packages/               # Package lists
 └── zshenv/                 # .zshenv template
 ```
 
